@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record id="fiber_inherit_sale_order_form_view" model="ir.ui.view">
+            <field name="name">fiber.inherit.sale.order.form.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath
+                        expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']"
+                        position="after"
+                >
+                    <field
+                            name="eg_code" string="EG Code"
+                            optional="show"
+                    />
+                    <field
+                            name="number_part" string="Number Part"
+                            optional="show"
+                    />
+                    <field
+                            name="manufactured_company" string="Manufactured Company"
+                            optional="show"
+                    />
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

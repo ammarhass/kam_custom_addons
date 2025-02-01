@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+
+        <record id="audit_note_first" model="audit.note">
+            <field name="name">عدم استيفاء التوقيعات الخاصه بالايصالات او المستندات</field>
+        </record>
+        <record id="audit_note_second" model="audit.note">
+            <field name="name">عدم استيفاء التوقيعات الخاصه بالاعتمادات</field>
+        </record>
+        <record id="audit_note_third" model="audit.note">
+            <field name="name">توجيه محاسبى خاطئ</field>
+        </record>
+        <record id="audit_note_fourth" model="audit.note">
+            <field name="name">تاريخ خاطئ</field>
+        </record>
+        <record id="audit_note_fifth" model="audit.note">
+            <field name="name">بيان خاطئ</field>
+        </record>
+        <record id="audit_note_sixth" model="audit.note">
+            <field name="name">اختيار يوميه خاطئه</field>
+        </record>
+        <record id="audit_note_seventh" model="audit.note">
+            <field name="name">خطا فى المستند المرفق</field>
+        </record>
+
+    </data>
+</odoo>

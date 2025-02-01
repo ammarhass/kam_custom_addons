@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+        <record id="payroll_activity_alarm" model="ir.cron">
+            <field name="name">Payroll Alarm</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="True"/>
+            <field name="model_id" ref="model_payroll_activity"/>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=7, minute=00, second=00))"/>
+            <field name="code">model._payroll_activity_alarm()</field>
+            <field name="state">code</field>
+        </record>    </data>
+</odoo>

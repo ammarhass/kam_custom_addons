@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+        <record id="operation_custom_category" model="ir.module.category">
+            <field name="name">Operation</field>
+        </record>
+
+        <record id="operation_access_user_one" model="res.groups">
+            <field name="name">Access User One</field>
+            <field name="category_id" ref="operation.operation_custom_category"/>
+        </record>
+        <record id="operation_access_user_two" model="res.groups">
+            <field name="name">Access User Two</field>
+            <field name="category_id" ref="operation.operation_custom_category"/>
+        </record>
+        <record id="operation_access_user_three" model="res.groups">
+            <field name="name">Access User Three</field>
+            <field name="category_id" ref="operation.operation_custom_category"/>
+        </record>
+        <record id="operation_access_user_four" model="res.groups">
+            <field name="name">Access User Four</field>
+            <field name="category_id" ref="operation.operation_custom_category"/>
+        </record>
+
+        <record id="operation_company_rule" model="ir.rule">
+            <field name="name">Operation multi-company</field>
+            <field name="model_id" ref="model_operation_general"/>
+            <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+        </record>
+        <record id="truck_type_company_rule" model="ir.rule">
+            <field name="name">Truck Type multi-company</field>
+            <field name="model_id" ref="model_truck_type"/>
+            <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,75 @@
+<odoo>
+    <data>
+
+        <record id="inherit_account_move_journal_form_view" model="ir.ui.view">
+            <field name="name">inherit.account.move.journal.form.view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//header/button[@name='action_post']" position="before">
+                    <widget name="web_ribbon" title="Audit Pass"
+                            attrs="{'invisible': [('audit_state', '!=', 'audit_pass')]}"/>
+                    <widget name="web_ribbon" title="Audit Not Pass" bg_color="bg-danger"
+                            attrs="{'invisible': [('audit_state', '!=', 'audit_not_pass')]}"/>
+                    <widget name="web_ribbon" title="Audit Accepted" bg_color="bg-info"
+                            attrs="{'invisible': [('audit_state', '!=', 'audit_accept')]}"/>
+                </xpath>
+                <xpath expr="//form/header/button[last()]" position="after">
+                    <button name="account_custom.journal_entry_wizard_action" string="Audited" type="action"
+                            attrs="{'invisible': ['|', ('audit_state', 'in', ['audit_pass', 'audit_not_pass', 'audit_accept']), ('state', '!=', 'posted')]}"
+                            groups="account_custom.audit_normal_group"/>
+                    <button name="audit_accept" string="Accept" type="object"
+                            attrs="{'invisible': [('audit_state', '!=', 'audit_not_pass')]}"
+                            groups="account_custom.accepted_normal_group"/>
+                </xpath>
+                <!--                <xpath expr="//div[@name='button_box']" position="after">-->
+                <!--                    <div name="button_box2" class="oe_button_box">-->
+                <!--                        -->
+                <!--                    </div>-->
+
+                <!--                </xpath>-->
+                <xpath expr="//field[@name='picking_type_id']" position="before">
+                    <field name="audit_state" widget="badge" decoration-success="audit_state == 'audit_pass'"
+                           decoration-info="audit_state == 'audit_accept'"
+                           decoration-danger="audit_state == 'audit_not_pass'"/>
+                    <field name="audit_note_ids" widget="many2many_tags"
+                           attrs="{'invisible': [('audit_state', 'not in', ['audit_not_pass', 'audit_accept'])]}"
+                           readonly="1"/>
+                </xpath>
+                <xpath expr="//page[@name='aml_tab']//field[@name='line_ids']//tree//field[@name='partner_id']"
+                       position="after">
+                    <field name="mandatory_partner" attrs="{'column_invisible': True}"/>
+                    <field name="mandatory_analytic_account" attrs="{'column_invisible': True}"/>
+                </xpath>
+
+                <xpath expr="//page[@name='aml_tab']//field[@name='line_ids']//tree//field[@name='partner_id']"
+                       position="attributes">
+                    <attribute name="attrs">{'required': [('mandatory_partner', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='aml_tab']//field[@name='line_ids']//tree//field[@name='analytic_distribution']"
+                       position="attributes">
+                    <attribute name="attrs">{'required': [('mandatory_analytic_account', '=', True)]}</attribute>
+	    	</xpath>
+		<xpath expr="//page[@name='invoice_tab']//field[@name='invoice_line_ids']//tree//field[@name='quantity']"
+                       position="after">
+                    <field name="product_weight" optional="hide"
+                           attrs="{'column_invisible': [('parent.move_type', 'not in', ['out_invoice'])]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="inherit_view_move_tree_test" model="ir.ui.view">
+            <field name="name">inherit.view.invoice.tree</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="audit_state" widget="badge" decoration-success="audit_state == 'audit_pass'"
+                           decoration-info="audit_state == 'audit_accept'"
+                           decoration-danger="audit_state == 'audit_not_pass'" optional="show"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

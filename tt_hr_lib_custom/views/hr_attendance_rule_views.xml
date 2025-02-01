@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+        <record id="inherit_hr_attendance_rule_view_form_custom" model="ir.ui.view">
+            <field name="name">inherit.hr.attendance.rule.view.from.custom</field>
+            <field name="model">hr.attendance.rule</field>
+            <field name="inherit_id" ref="tt_hr_lib.hr_attendance_rule_view_form"/>
+            <field name="arch" type="xml">
+                <field name="grace_period" position="after">
+                    <field name="hour_salary"/>
+                    <field name="number_of_minutes"/>
+                    <field name="apply_break_time"/>
+                    <field name="break_time" widget="float_time" attrs="{'invisible':[('apply_break_time', '!=', True)]}"/>
+                </field>
+                <field name="flex_hours" position="after">
+                    <field name="approved_month_work_minutes" string="Month Working Hours"
+                           attrs="{'invisible': [('flex_hours', '!=', 'monthly')]}"/>
+                </field>
+                <page name="rule_details" position="replace">
+                    <page string="Rule Details" name="rule_details">
+                        <field name="line_ids">
+                        <tree editable="button">
+                            <field name="name" width="60px"/>
+                            <field name="delay_from" widget="float_time"/>
+                            <field name="delay_to" widget="float_time"/>
+                            <field name="one" attrs="{'column_invisible': [('parent.flex_hours', '=','monthly')]}"/>
+                            <field name="two" attrs="{'column_invisible': [('parent.flex_hours', '=','monthly')]}"/>
+                            <field name="three" attrs="{'column_invisible': [('parent.flex_hours', '=','monthly')]}"/>
+                            <field name="month_flex_deduction"
+                                   attrs="{'column_invisible': [('parent.flex_hours', '!=','monthly')]}"/>
+                            <field name="late" attrs="{'column_invisible': [('early', '=', True)]}"/>
+                            <field name="early" attrs="{'column_invisible': [('late', '=', True)]}"/>
+
+                        </tree>
+                        </field>
+                    </page>
+                </page>
+                <page name="rule_details" position="after">
+                    <page name="employees_list" string="Employees">
+                        <field name="employee_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </page>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+
+        <record id="inherit_sale_order_form_view_vision" model="ir.ui.view">
+        <field name="name">inherit.sale.order.form.view.vision</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="//page[@name='order_lines']//field[@name='order_line']//tree//field[@name='name']"
+               position="after">
+            <field name="num_of_days" optional="hide"/>
+        </xpath>
+        </field>
+        </record>
+
+    </data>
+</odoo>

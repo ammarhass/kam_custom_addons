@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+
+        <record id="inherit_product_template_form_view_custom" model="ir.ui.view">
+            <field name="name">product.template.form.inherit.custom</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <page name="invoicing" position="after">
+                    <page name="reminder_text" string="Message">
+                        <group>
+                            <field name="reminder_user_id"/>
+                            <field name="reminder_date"/>
+                            <field name="reminder_message"/>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+        <record id="pearl_view_product_template_form_inherit" model="ir.ui.view">
+            <field name="name">pearl.product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <field name="default_code" position="after">
+                    <field name="fop"/>
+                    <field name="cpm"/>
+                </field>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

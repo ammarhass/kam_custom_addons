@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="pearl_report_purchasequotation_document_inherit"
+              inherit_id="purchase.report_purchasequotation_document">
+
+        <xpath expr="//table[@class='table table-sm mt-4']" position="replace">
+            <table class="table table-sm mt-4">
+                <thead style="display: table-row-group">
+                    <tr>
+                        <th>#</th>
+                        <th name="th_description">
+                            <strong>Product</strong>
+                        </th>
+                        <th name="th_image">
+                            <strong>Image</strong>
+                        </th>
+                        <th name="th_internal_reference">
+                            <strong>Internal Reference</strong>
+                        </th>
+                        <th name="th_brand">
+                            <strong>Brand</strong>
+                        </th>
+                        <th name="th_expected_date" class="text-center">
+                            <strong>Expected Date</strong>
+                        </th>
+                        <th name="th_quantity" class="text-end">
+                            <strong>Qty</strong>
+                        </th>
+                        <th name="th_unit_price" class="text-end">
+                            <strong>Unit Price</strong>
+                        </th>
+                        <th name="th_amount_total" class="text-end">
+                            <strong>Amount</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="a" t-value="1"/>
+                    <t t-foreach="o.order_line" t-as="order_line">
+                        <tr t-att-class="'bg-200 fw-bold o_line_section' if order_line.display_type == 'line_section' else 'fst-italic o_line_note' if order_line.display_type == 'line_note' else ''">
+                            <t t-if="not order_line.display_type">
+                                 <td>
+                                    <span t-esc="a"/>
+                                    <t t-set="a" t-value="a + 1"/>
+                                </td>
+                                <td>
+                                    <span t-field="order_line.product_id.name"/>
+                                </td>
+                                <td class="text-right">
+                                    <img t-if="order_line.product_id.image_1920"
+                                         t-att-src="image_data_uri(order_line.product_id.image_1920)"
+                                         style="width: 90%"/>
+                                </td>
+                                <td name="account_invoice_line_name">
+                                    <span t-field="order_line.product_id.default_code"/>
+                                </td>
+                                <td>
+                                    <span t-field="order_line.brand_id.name" t-if="order_line.brand_id"/>
+                                </td>
+                                <td class="text-center">
+                                    <span t-field="order_line.date_planned"/>
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="order_line.product_qty"/>
+                                    <span t-field="order_line.product_uom" groups="uom.group_uom"/>
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="order_line.price_unit"/>
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="order_line.price_subtotal"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </t>
+                            <t t-else="">
+                                <td colspan="99" id="section">
+                                    <span t-field="order_line.name"/>
+                                </td>
+                            </t>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+            <div id="total" class="row justify-content-end">
+                <div class="col-4">
+                    <table class="table table-sm table-borderless">
+                        <t t-set="tax_totals" t-value="o.tax_totals"/>
+                        <t t-call="account.document_tax_totals"/>
+                    </table>
+                </div>
+            </div>
+            <div style="font-size:15px; padding-top:15px; padding-bottom:15px;">
+                <span>
+                    <strong>Quantity :</strong>
+                </span>
+                <span t-field="o.purchase_total_quantity"/>
+            </div>
+        </xpath>
+
+
+    </template>
+</odoo>
+
+<!-- <div t-if="o.user_id" class="col-3 bm-2">-->
+<!--                    <strong>Purchase Representative:</strong>-->
+<!--                    <p t-field="o.user_id" class="m-0"/>-->
+<!--                </div>-->

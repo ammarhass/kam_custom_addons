@@ -1,0 +1,521 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* operation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-17 16:16+0000\n"
+"PO-Revision-Date: 2024-07-17 16:16+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: operation
+#: model:res.groups,name:operation.operation_access_user_four
+msgid "Access User Four"
+msgstr ""
+
+#. module: operation
+#: model:res.groups,name:operation.operation_access_user_one
+msgid "Access User One"
+msgstr ""
+
+#. module: operation
+#: model:res.groups,name:operation.operation_access_user_three
+msgid "Access User Three"
+msgstr ""
+
+#. module: operation
+#: model:res.groups,name:operation.operation_access_user_two
+msgid "Access User Two"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Account Confirm"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields.selection,name:operation.selection__operation_general__state__account_confirm
+msgid "Account Confirmed"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields.selection,name:operation.selection__operation_general__state__account_submit
+msgid "Account Submitted"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__additional_notes
+msgid "Additional Notes"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__approval_time
+msgid "Approval Time"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__arrival_time
+msgid "Arrival Time"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__client_delegate
+msgid "Client Delegate"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__client_drop
+msgid "Client Drop"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__client_labour
+msgid "Client Labour"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__client_nolon
+msgid "Client Nolon"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__client_overnight
+msgid "Client Overnight"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Client Payment"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__client_return
+msgid "Client Return"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__client_total
+msgid "Client Total"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__commission
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Commission"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__company_id
+msgid "Company"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Confirm"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields.selection,name:operation.selection__operation_general__state__cost_confirm
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Cost Confirmed"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Costing"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__create_uid
+#: model:ir.model.fields,field_description:operation.field_truck_type__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__create_date
+#: model:ir.model.fields,field_description:operation.field_truck_type__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__custody
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Custody"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__customer_id
+msgid "Customer"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__customer_name
+msgid "Customer Name"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Delegate"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__delegates
+msgid "Delegates"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Delegation"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__delivery_date
+msgid "Delivery Date"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__departure_date
+msgid "Departure Date"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__departure_time
+msgid "Departure Time"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Destination"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__destination_departure_date
+msgid "Destination Departure Date"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__destination_departure_time
+msgid "Destination Departure Time"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__destination_over_night
+msgid "Destination Over Night"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__destination_over_time
+msgid "Destination Over Time"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__display_name
+#: model:ir.model.fields,field_description:operation.field_truck_type__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields.selection,name:operation.selection__operation_general__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__driver
+msgid "Driver"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__drop
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Drop"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__drop_overnight
+msgid "Drop Overnight"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Drop/Overnight"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__elastic
+msgid "Elastic"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__extra_notes
+msgid "Extra Notes"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields.selection,name:operation.selection__operation_general__state__final_confirm
+msgid "Final Confirm"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__final_nolon
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Final Nolon"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "From"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__from_from
+msgid "From From"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "General Info"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__group_four
+msgid "Group Four"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__group_three
+msgid "Group Three"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__group_two
+msgid "Group Two"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__id
+#: model:ir.model.fields,field_description:operation.field_truck_type__id
+msgid "ID"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Invoice"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__labor
+msgid "Labor"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__labour
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Labour"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general____last_update
+#: model:ir.model.fields,field_description:operation.field_truck_type____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__write_uid
+#: model:ir.model.fields,field_description:operation.field_truck_type__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__write_date
+#: model:ir.model.fields,field_description:operation.field_truck_type__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Loading"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__loading_date
+msgid "Loading Date"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__name
+#: model:ir.model.fields,field_description:operation.field_truck_type__name
+msgid "Name"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__nolon
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Nolon"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__notes
+msgid "Notes"
+msgstr ""
+
+#. module: operation
+#: model:ir.module.category,name:operation.operation_custom_category
+msgid "Operation"
+msgstr ""
+
+#. module: operation
+#: model:ir.actions.act_window,name:operation.operation_general_action
+#: model:ir.ui.menu,name:operation.operation_menu
+#: model:ir.ui.menu,name:operation.operation_root_menu
+msgid "Operations"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__over_night
+msgid "Over Night"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__over_time
+msgid "Over Time"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Overnight"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__payment_number
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Payment Number"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__phone
+msgid "Phone"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__po_number
+msgid "Po Number"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__req_date
+msgid "Req Date"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Return"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__return_return
+msgid "Return Return"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__road_crossing
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Road Crossing"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__state
+msgid "State"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Submit To Account"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Submit To Cost"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__supplier_id
+msgid "Supplier"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "To"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__to_to
+msgid "To To"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__tolls_and_scales
+msgid "Tolls And Scales"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Tolls and Scales"
+msgstr ""
+
+#. module: operation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Total"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__total_transportation
+#: model_terms:ir.ui.view,arch_db:operation.operation_general_from_view
+msgid "Total Transportation"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__truck_license
+msgid "Truck License"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__truck_type_ids
+msgid "Truck Type"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__user_four_access
+msgid "User Four Access"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields,field_description:operation.field_operation_general__user_three_access
+msgid "User Three Access"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields.selection,name:operation.selection__operation_general__state__confirm
+msgid "confirmed"
+msgstr ""
+
+#. module: operation
+#: model:ir.model,name:operation.model_operation_general
+msgid "operation.general"
+msgstr ""
+
+#. module: operation
+#: model:ir.model.fields.selection,name:operation.selection__operation_general__state__submit
+msgid "submitted To Cost"
+msgstr ""
+
+#. module: operation
+#: model:ir.model,name:operation.model_truck_type
+msgid "truck.type"
+msgstr ""

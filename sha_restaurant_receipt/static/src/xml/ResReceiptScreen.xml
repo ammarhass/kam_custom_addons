@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template">
+
+    <t t-name="ResReceiptScreen" owl="1">
+        <div class="receipt-screen screen">
+            <div class="screen-content">
+                <div class="top-content">
+                    <div class="top-content-center">
+                        <h1>Bill Printing</h1>
+                    </div>
+                    <span class="button next highlight" t-on-click="confirm">
+                        <span>Ok</span>
+                        <span/>
+                        <i class="fa fa-angle-double-right"/>
+                    </span>
+                </div>
+                <div class="centered-content">
+                    <div class="button print" t-on-click="printReceipt">
+                        <i class="fa fa-print"/>
+                        <span/>
+                        <span>Print</span>
+                    </div>
+                    <div class="pos-receipt-container" t-ref="order-resreceipt">
+                        <ResReceipt order_changes="changes" order_captain="captain"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

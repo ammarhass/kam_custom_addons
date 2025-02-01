@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="inherit_purchase_order_form_inherit" model="ir.ui.view">
+            <field name="name">inherit.purchase.order.from.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="domain">[('company_id', '=', company_id)]</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

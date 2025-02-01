@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template">
+
+    <t t-name="ProductScreenInherit" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension" owl="1">
+
+        <xpath expr="//div[hasclass('screen-full-width')]" position="replace">
+
+            <div class="screen-full-width">
+                <div class="leftpane pane-border" t-if="!env.isMobile || state.mobile_pane === 'left'">
+                    <OrderWidget/>
+                </div>
+                <div class="leftpane" t-if="!env.isMobile || state.mobile_pane === 'left'">
+                    <div class="pads">
+                        <div class="control-buttons">
+                            <t t-if="env.isMobile and controlButtons.length > 3">
+                                <div class="control-button" t-on-click="_displayAllControlPopup">More...</div>
+                            </t>
+                            <t t-else="">
+                                <t t-foreach="controlButtons" t-as="cb" t-key="cb.name">
+                                    <t t-component="cb.component" t-key="cb.name"/>
+                                </t>
+                            </t>
+                        </div>
+                        <div class="subpads">
+                            <NumpadWidget activeMode="env.pos.numpadMode"/>
+                            <ActionpadWidget partner="partner" actionName="constructor.numpadActionName" onSwitchPane.bind="switchPane"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="rightpane" t-if="!env.isMobile || state.mobile_pane === 'right'">
+                    <ProductsWidget mobileSearchBarIsShown="props.mobileSearchBarIsShown"/>
+                    <MobileOrderWidget t-if="env.isMobile" pane="state.mobile_pane" onSwitchPane.bind="switchPane"/>
+                    <!--                    <div class="pads" t-if="!env.isMobile">-->
+                    <!--                        <div class="control-buttons">-->
+                    <!--                            <t t-if="env.isMobile and controlButtons.length > 3">-->
+                    <!--                                <div class="control-button" t-on-click="_displayAllControlPopup">More...</div>-->
+                    <!--                            </t>-->
+                    <!--                            <t t-else="">-->
+                    <!--                                <t t-foreach="controlButtons" t-as="cb" t-key="cb.name">-->
+                    <!--                                    <t t-component="cb.component" t-key="cb.name"/>-->
+                    <!--                                </t>-->
+                    <!--                            </t>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="subpads">-->
+                    <!--                            <NumpadWidget activeMode="env.pos.numpadMode"/>-->
+                    <!--                            <ActionpadWidget partner="partner" actionName="constructor.numpadActionName" onSwitchPane.bind="switchPane"/>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                </div>
+            </div>
+
+        </xpath>
+
+    </t>
+
+</templates>

@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <record id="pos_category_wizard_form_view" model="ir.ui.view">
+            <field name="name">pos.category.wizard.form.view</field>
+            <field name="model">pos.category.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="limit"/>
+                        </group>
+                        <footer>
+                            <button name="apply_action" type="object" string="Apply"
+                                    class="btn-primary"/>
+                            <button string="Cancel" special="cancel" class="btn btn-second"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pos_category_wizard_action" model="ir.actions.act_window">
+            <field name="name">Pos Category Wizard</field>
+            <field name="res_model">pos.category.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="pos_category_wizard_form_view"/>
+        </record>
+
+        <menuitem name="Discount Limit" action="pos_category_wizard_action" id="pos_category_wizard_menu" parent="point_of_sale.menu_point_config_product"/>
+    </data>
+</odoo>

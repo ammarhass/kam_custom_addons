@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="arkad_inherit_account_move_form" model="ir.ui.view">
+            <field name="name">arkad.inherit.account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@id='header_left_group']" position="inside">
+                    <field name="analytic_account_id" groups="arkad_excel_report.arkad_normal_group"/>
+                    <field name="is_item_expenses" string="مصاريف البند" groups="arkad_excel_report.arkad_normal_group"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

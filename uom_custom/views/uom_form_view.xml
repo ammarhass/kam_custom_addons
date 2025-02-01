@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+
+        <record id='inherit_uom_form_view' model="ir.ui.view">
+            <field name="name">inherit.uom.form.view</field>
+            <field name="model">uom.uom</field>
+            <field name="inherit_id" ref="uom.product_uom_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='uom_type']" position="after">
+                    <field name="is_kilogram" string="Kilogram"/>
+                    <field name="is_tons" string="Tons"/>
+                    <field name="is_gram" string="Gram"/>
+                </xpath>
+            </field>
+
+        </record>
+    </data>
+</odoo>

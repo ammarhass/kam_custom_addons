@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+fields_average_wizard,fields.average.wizard,model_fields_average,,1,1,1,1
+create_unbuild_order_wizard,create.unbuild.order.wizard,model_create_unbuild_order,,1,1,1,1

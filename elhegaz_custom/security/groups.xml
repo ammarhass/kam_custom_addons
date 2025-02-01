@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <record id="invoice_price_groups_category" model="ir.module.category">
+            <field name="name">Control Product Price in Invoice Line</field>
+        </record>
+
+        <record id="manager_access_product_price_invoice" model="res.groups">
+            <field name="name">Access Price</field>
+            <field name="category_id" ref="invoice_price_groups_category"/>
+        </record>
+    </data>
+</odoo>

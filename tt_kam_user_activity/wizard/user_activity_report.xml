@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="user_activity_report_view_form" model="ir.ui.view">
+            <field name="name">user.activity.report.form</field>
+            <field name="model">user.activity.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="user_id"/>
+                            <field name="company_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        </group>
+                        <footer>
+                            <button string="Print" name="print_user_activity_report" class="btn-primary" type="object"/>
+                            <button string="Cancel" class="btn-default" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="user_activity_report_action_window" model="ir.actions.act_window">
+            <field name="name">User Activity Report</field>
+            <field name="res_model">user.activity.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="user_activity_report_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="user_report_root" name="User Activity" action="user_activity_report_action_window"/>
+        <!-- Uncomment and adjust as needed -->
+        <!--
+        <menuitem id="user_report_categ" name="User Report" parent="user_report_root" sequence="1"/>
+        <menuitem id="report_menu" name="User Activity Report" parent="user_report_categ" action="user_activity_report_action_window" sequence="1"/>
+        -->
+
+    </data>
+</odoo>

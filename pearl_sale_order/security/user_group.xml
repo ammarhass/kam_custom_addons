@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="sale_order_discount" model="ir.module.category">
+            <field name="name">Sale Order Discount</field>
+        </record>
+
+        <record id="sale_order_price_unit" model="ir.module.category">
+            <field name="name">Sale Order Price Unit</field>
+        </record>
+
+        <record id="sale_order_price_unit_group" model="res.groups">
+            <field name="name">Sale Order Price User</field>
+            <field name="category_id" ref="pearl_sale_order.sale_order_price_unit"/>
+        </record>
+
+
+        <record id="sale_order_discount_access" model="res.groups">
+            <field name="name">Sale Order Discount User</field>
+            <field name="category_id" ref="pearl_sale_order.sale_order_discount"/>
+        </record>
+
+        <record id="sale_order_approval_phases" model="ir.module.category">
+            <field name="name">Sale Order Approval</field>
+        </record>
+
+        <record id="sale_order_first_approval_group" model="res.groups">
+            <field name="name">First Approval</field>
+            <field name="category_id" ref="sale_order_approval_phases"/>
+        </record>
+
+        <record id="sale_order_second_approval_group" model="res.groups">
+            <field name="name">Second Approval</field>
+            <field name="category_id" ref="sale_order_approval_phases"/>
+        </record>
+
+        <record id="sale_order_third_approval_group" model="res.groups">
+            <field name="name">Third Approval</field>
+            <field name="category_id" ref="sale_order_approval_phases"/>
+        </record>
+    </data>
+</odoo>

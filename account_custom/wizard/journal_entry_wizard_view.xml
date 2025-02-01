@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="journal_entry_wizard_form_view" model="ir.ui.view">
+            <field name="name">journal.entry.wizard.form.view</field>
+            <field name="model">journal.entry.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="audit_result"/>
+                        <field name="audit_note_ids" widget="many2many_tags" attrs="{'required': [('audit_result', '=', 'not_pass')]}" options="{'no_create': True}"/>
+                    </group>
+                     <footer>
+                        <button name="audit_submit" type="object" string="Submit"
+                                class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn btn-second"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="journal_entry_wizard_action" model="ir.actions.act_window">
+            <field name="name">Journal Entry Audit</field>
+            <field name="res_model">journal.entry.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="journal_entry_wizard_form_view"/>
+            <field name="context">{'default_journal_id': active_id}</field>
+        </record>
+    </data>
+</odoo>

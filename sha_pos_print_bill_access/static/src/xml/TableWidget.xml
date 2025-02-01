@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template">
+
+    <t t-name="TableWidgetInherit" t-inherit="pos_restaurant.TableWidget" t-inherit-mode="extension" owl="1">
+
+        <xpath expr="//div[hasclass('table')]" position="inside">
+            <style>
+                .billed-table {
+                position: absolute;
+                top: 10%;
+                left: -10%;
+                background: white;
+                margin-top: 0px;
+                margin-left: 0px;
+                width: 50px;
+                height: 10px;
+                line-height: 10px;
+                font-size: 11px;
+                z-index: 10;
+                transform: rotate(-45deg);
+                color:black;
+                }
+            </style>
+            <span t-if="orderBilled" class="billed-table">
+                <strong>billed</strong>
+            </span>
+        </xpath>
+
+    </t>
+
+</templates>

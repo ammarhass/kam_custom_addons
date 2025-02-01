@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="act_report_xml_view_log" model="ir.ui.view">
+        <field name="name">ir.actions.report</field>
+        <field name="model">ir.actions.report</field>
+        <field name="inherit_id" ref="base.act_report_xml_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='advanced']" position="before">
+                <page name="log" string="Logging">
+                    <group>
+                        <field name="create_log"/>
+                        <field name="log_attachment"/>
+                        <button name="action_view_report_logs" type="object" string="View Logs"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

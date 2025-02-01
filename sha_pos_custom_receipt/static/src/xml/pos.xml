@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template">
+
+    <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+
+        <xpath expr="//div[hasclass('pos-receipt-contact')]" position="replace">
+
+            <style>
+                .receipt_table {
+                width:100%;
+                }
+                .td_receipt {
+                text-align: right;
+                padding:3px;
+                border: 1px solid black;
+                }
+                .th_receipt {
+                text-align: right;
+                padding:3px;
+                border: 1px solid black;
+                }
+                tr{
+                border: 1px solid black;
+                }
+                .receipt_table{
+                font-size:11px!important;
+                }
+
+            </style>
+
+            <h4 style="text-align: center;">
+                <span>فاتورة بيع</span>
+            </h4>
+
+            <div class="pos-receipt-contact">
+                <table class="receipt_table" dir="rtl">
+                    <tr>
+                        <td class="td_receipt col-3">
+                            <span>رقم الجلسة</span>
+                        </td>
+                        <td class="td_receipt">
+                            <span>
+                                <t t-esc="env.pos.pos_session.name"/>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_receipt col-3">
+                            <span>رقم الفاتورة</span>
+                        </td>
+                        <td class="td_receipt">
+                            <span>
+                                <t t-esc="receipt.name"/>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_receipt">
+                            <span>الكاشير</span>
+                        </td>
+                        <td class="td_receipt">
+                            <span>
+                                <t t-esc="receipt.cashier"/>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_receipt">
+                            <span>التاريخ</span>
+                        </td>
+                        <td class="td_receipt">
+                            <span>
+                                <span dir="ltr">
+                                    <t t-esc="receipt.date.localestring"/>
+                                </span>
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_receipt">
+                            <span>الوقت</span>
+                        </td>
+                        <td class="td_receipt">
+                            <span>
+                                <span dir="ltr">
+                                    <t t-esc="receipt.date.hour"/>
+                                    :
+                                    <t t-esc="receipt.date.minute"/>
+                                </span>
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_receipt">
+                            <span>العميل</span>
+                        </td>
+                        <td class="td_receipt">
+                            <t t-if="receipt.partner">
+                                <span>
+                                    <t t-esc="receipt.partner.name"/>
+                                </span>
+                            </t>
+                            <t t-else="">
+
+                            </t>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_receipt">
+                            <span>رقم الهاتف</span>
+                        </td>
+                        <td class="td_receipt">
+                            <t t-if="receipt.partner">
+                                <span>
+                                    <t t-esc="receipt.partner.mobile"/>
+                                </span>
+                            </t>
+                            <t t-else="">
+                            </t>
+                        </td>
+                    </tr>
+                </table>
+
+                <!--                <div class="row text-center" dir="rtl">-->
+                <!--                    <div class="col-6">-->
+                <!--                        <span style="color:#34b9d3;">الموقع الالكترونى :</span>-->
+                <!--                    </div>-->
+                <!--                    <div class="col-6">-->
+                <!--                        <span style="color:#34b9d3;">البريد الالكترونى :</span>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+
+                <!--                <t t-if="receipt.company.contact_address">-->
+                <!--                    <div>-->
+                <!--                        <t t-esc="receipt.company.contact_address"/>-->
+                <!--                    </div>-->
+                <!--                </t>-->
+                <!--                <t t-if="receipt.company.phone">-->
+                <!--                    <div>Tel:-->
+                <!--                        <t t-esc="receipt.company.phone"/>-->
+                <!--                    </div>-->
+                <!--                </t>-->
+                <!--                <t t-if="receipt.company.vat">-->
+                <!--                    <div><t t-esc="receipt.company.vat_label"/>:-->
+                <!--                        <t t-esc="receipt.company.vat"/>-->
+                <!--                    </div>-->
+                <!--                </t>-->
+                <!--                <t t-if="receipt.company.email">-->
+                <!--                    <div>-->
+                <!--                        <t t-esc="receipt.company.email"/>-->
+                <!--                    </div>-->
+                <!--                </t>-->
+                <!--                <t t-if="receipt.company.website">-->
+                <!--                    <div>-->
+                <!--                        <t t-esc="receipt.company.website"/>-->
+                <!--                    </div>-->
+                <!--                </t>-->
+                <!--                <t t-if="receipt.header_html">-->
+                <!--                    <t t-out="receipt.header_html"/>-->
+                <!--                </t>-->
+                <!--                <t t-if="!receipt.header_html and receipt.header">-->
+                <!--                    <div style="white-space:pre-line">-->
+                <!--                        <t t-esc="receipt.header"/>-->
+                <!--                    </div>-->
+                <!--                </t>-->
+                <!--                <t t-if="receipt.cashier">-->
+                <!--                    <div class="cashier">-->
+                <!--                        <div>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+                <!--                        <div>Served by-->
+                <!--                            <t t-esc="receipt.cashier"/>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </t>-->
+            </div>
+
+        </xpath>
+
+        <xpath expr="//t[@t-foreach='receipt.paymentlines']" position="replace">
+            <t t-foreach="receipt.paymentlines" t-as="line" t-key="line.cid">
+                <div class="receipt_summary">
+                    <table class='receipt_table'>
+                        <tr>
+                            <td class="td_receipt" style="text-align: left;">
+                                <span>
+                                    <t t-esc="line.name"/>
+                                </span>
+                            </td>
+                            <td class="td_receipt" style="text-align: left;">
+                                <span t-esc="env.pos.format_currency(line.amount)"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[hasclass('receipt-change')]" position="replace"/>
+
+        <xpath expr="//div[hasclass('orderlines')]" position="before">
+            <xpath expr="//t[@t-foreach='receipt.paymentlines']" position="move"/>
+            <br/>
+        </xpath>
+
+        <xpath expr="//t[@t-if='isTaxIncluded']" position="replace"/>
+
+        <xpath expr="//div[hasclass('pos-receipt-right-align')]" position="replace"/>
+        <xpath expr="//div[hasclass('pos-receipt-right-align')]" position="replace"/>
+        <!--        <xpath expr="//div[hasclass('pos-receipt-right-align')][2]" position="replace"/>-->
+
+        <xpath expr="//t[@t-if='this.env.pos.config.pos_total_quantity']" position="before">
+            <xpath expr="//div[hasclass('pos-receipt-amount')][1]" position="move"/>
+        </xpath>
+
+        <xpath expr="//div[hasclass('pos-receipt-amount')][1]" position="replace">
+            <div class="pos-receipt-amount">
+                <table class='receipt_total' dir="rtl" style="font-size:14px;">
+                    <tr>
+                        <td class="td_receipt width40" style="">
+                            <span>الإجمالى</span>
+                        </td>
+                        <td class="td_receipt" style="text-align:right;">
+                            <span t-esc="env.pos.format_currency(receipt.total_with_tax)"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </xpath>
+
+    </t>
+
+    <t t-name="OrderLinesReceipt" t-inherit="point_of_sale.OrderLinesReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-foreach]" position="replace">
+
+            <table class="receipt_table" style="" dir="rtl">
+                <tr>
+                    <th class="th_receipt">الصنف</th>
+                    <th class="th_receipt">الكمية</th>
+                    <th class="th_receipt">السعر</th>
+                    <th class="th_receipt">الإجمالى</th>
+                </tr>
+                <t t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+                    <t t-if="isSimple(line)">
+                        <tr>
+                            <td class="td_receipt">
+                                <span>
+                                    <t t-esc="line.product_name_wrapped[0]"/>
+                                </span>
+                            </td>
+                            <td class="td_receipt">
+                                <span>
+                                    1
+                                </span>
+                            </td>
+                            <td class="td_receipt">
+                                <span>
+                                    <t t-esc="env.pos.format_currency(line.price_display)"/>
+                                </span>
+                            </td>
+                            <td class="td_receipt">
+                                <span>
+                                    <t t-esc="env.pos.format_currency(line.price)"/>
+                                </span>
+                            </td>
+                        </tr>
+                    </t>
+                    <t t-else="">
+                        <tr>
+                            <td class="td_receipt">
+                                <span>
+                                    <t t-esc="line.product_name_wrapped[0]"/>
+                                </span>
+                            </td>
+                            <td class="td_receipt">
+                                <span>
+                                    <t t-esc="(line.quantity).toFixed(3)"/>
+                                </span>
+                            </td>
+                            <td class="td_receipt">
+                                <span>
+                                    <t t-esc="env.pos.format_currency(line.price)"/>
+                                </span>
+                            </td>
+                            <td class="td_receipt">
+                                <span>
+                                    <t t-esc="env.pos.format_currency(line.price_display)"/>
+                                </span>
+                            </td>
+                        </tr>
+                    </t>
+
+                </t>
+            </table>
+            <br/>
+
+        </xpath>
+    </t>
+
+</templates>

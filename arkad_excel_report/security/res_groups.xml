@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+        <record id="arkad_groups_category" model="ir.module.category">
+            <field name="name">Arkad Group</field>
+        </record>
+
+        <record id="arkad_normal_group" model="res.groups">
+            <field name="name">Arkad User</field>
+            <field name="category_id" ref="arkad_groups_category"/>
+        </record>
+
+    </data>
+</odoo>

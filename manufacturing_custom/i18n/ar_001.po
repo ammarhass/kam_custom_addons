@@ -1,0 +1,71 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* manufacturing_custom
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-12 02:57+0000\n"
+"PO-Revision-Date: 2024-07-12 06:02+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: manufacturing_custom
+#: model:ir.model,name:manufacturing_custom.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr "بند قائمة المواد"
+
+#. module: manufacturing_custom
+#: model:ir.model.fields,field_description:manufacturing_custom.field_mrp_unbuild__bom_line_ids
+msgid "BoM Lines"
+msgstr ""
+
+#. module: manufacturing_custom
+#: model_terms:ir.ui.view,arch_db:manufacturing_custom.inherit_mrp_unbuild_order_form_view
+msgid "Components"
+msgstr ""
+
+#. module: manufacturing_custom
+#: model_terms:ir.ui.view,arch_db:manufacturing_custom.inherit_mrp_unbuild_order_form_view
+msgid "Percentage"
+msgstr "النسبة"
+
+#. module: manufacturing_custom
+#: model:ir.model.fields,field_description:manufacturing_custom.field_mrp_bom_line__product_actual_quantity
+msgid "Product Actual Quantity"
+msgstr "النسبة المصنعة بالفعل"
+
+#. module: manufacturing_custom
+#: model_terms:ir.ui.view,arch_db:manufacturing_custom.inherit_mrp_unbuild_order_form_view
+msgid "Product Attachments"
+msgstr ""
+
+#. module: manufacturing_custom
+#: model:ir.model.fields,field_description:manufacturing_custom.field_mrp_bom_line__product_qty_percentage
+msgid "Product Qty Percentage"
+msgstr ""
+
+#. module: manufacturing_custom
+#: model_terms:ir.ui.view,arch_db:manufacturing_custom.inherit_mrp_unbuild_order_form_view
+msgid "Quantity"
+msgstr "النسبة المصنعة بالفعل"
+
+#. module: manufacturing_custom
+#: model:ir.model,name:manufacturing_custom.model_mrp_unbuild
+#: model:ir.model.fields,field_description:manufacturing_custom.field_mrp_bom_line__unbuild_order_id
+msgid "Unbuild Order"
+msgstr "أمر التفكيك "
+
+#. module: manufacturing_custom
+#: model:ir.actions.act_window,name:manufacturing_custom.action_mrp_unbuild_percentage
+#: model:ir.model.fields,field_description:manufacturing_custom.field_mrp_unbuild__unbuild_order_percentage
+#: model:ir.ui.menu,name:manufacturing_custom.menu_mrp_unbuild_percentage
+msgid "Unbuild Order Percentage"
+msgstr "أوامر  التفكيك بالنسبة"

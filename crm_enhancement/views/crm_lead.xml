@@ -1,0 +1,487 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="crm_lead_form_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='stage_id']" position="attributes">
+                    <attribute name="options"></attribute>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <field name="button_invisible" invisible="1"/>
+                    <field name="previous_stage" invisible="1"/>
+                    <field name="is_first_stage" invisible="1"/>
+                    <button name="action_accept" type="object" string="Next" class="btn-primary"
+                            attrs="{'invisible':['|',('button_invisible','=',True),('type', '=', 'lead')]}"/>
+                    <button name="action_previous" type="object" string="Previous" class="btn-primary"
+                            attrs="{'invisible':['|',('previous_stage','=',True),('type', '=', 'lead')]}"/>
+                    <button name="action_reset_to_first_stage"
+                            type="object"
+                            string="Reset to First Stage"
+                            class="btn-primary"
+                            attrs="{'invisible': ['|',('is_first_stage', '=', True),('type', '=', 'lead')]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='campaign_id']" position="attributes">
+                    <attribute name="string">Project</attribute>
+                </xpath>
+                <xpath expr="//field[@name='team_id']" position="after">
+                    <field name="communication_method"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//label[@for='street']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='website']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='partner_name']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+
+                </xpath>
+                <xpath expr="//div[hasclass('o_address_format')]" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_title')]//div[4]" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+
+                <xpath expr="//group[@name='lead_info']" position="replace">
+                    <group name="lead_info" attrs="{'invisible': [('type', '=', 'opportunity')]}">
+
+
+                        <label for="email_from_group_lead_info" class="oe_inline"/>
+                        <div class="o_row o_row_readonly">
+                            <button name="mail_action_blacklist_remove" class="fa fa-ban text-danger"
+                                    title="This email is blacklisted for mass mailings. Click to unblacklist."
+                                    type="object" context="{'default_email': email_from}" groups="base.group_user"
+                                    attrs="{'invisible': [('is_blacklisted', '=', False)]}"/>
+                            <field name="email_from" id="email_from_group_lead_info" string="Email" widget="email"/>
+                            <span class="fa fa-exclamation-triangle text-warning oe_edit_only"
+                                  title="By saving this change, the customer email will also be updated."
+                                  attrs="{'invisible': [('partner_email_update', '=', False)]}"/>
+                        </div>
+
+                        <label for="mobile" class="oe_inline"/>
+                        <div class="o_row o_row_readonly">
+                            <button name="phone_action_blacklist_remove" class="fa fa-ban text-danger"
+                                    title="This phone number is blacklisted for SMS Marketing. Click to unblacklist."
+                                    type="object" context="{'default_phone': mobile}" groups="base.group_user"
+                                    attrs="{'invisible': [('mobile_blacklisted', '=', False)]}"/>
+                            <field name="mobile" widget="phone" string="Mobile"/>
+                        </div>
+                    </group>
+                </xpath>
+                <xpath expr="//page[@name='internal_notes']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    <!--                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>-->
+                </xpath>
+                <xpath expr="//page[@name='lead']" position="after">
+                    <page name="stage1" string="Stage1"
+                          attrs="{'invisible': [('type', '=', 'lead')]}">
+                        <field name="is_lead" invisible="1"/>
+                        <field name="stage_seq" invisible="1"/>
+
+                        <group>
+                            <field name="cus_name"
+                                   attrs="{'required': [('stage_seq', '=', 1), ('type', '!=', 'lead')]}"/>
+                            <field name="cus_phone"
+                                   attrs="{'required': [('stage_seq', '=', 1), ('type', '!=', 'lead')]}"/>
+                            <field name="alt_phone"/>
+                            <field name="cus_region"
+                                   attrs="{'required': [('stage_seq', '=', 1), ('type', '!=', 'lead')]}"/>
+                            <field name="cus_source"
+                                   attrs="{'required': [('stage_seq', '=', 1), ('type', '!=', 'lead')]}"/>
+                            <field name="project_name"
+                                   attrs="{'required': [('stage_seq', '=', 1), ('type', '!=', 'lead')]}"/>
+                            <field name="communication_method_stage"
+                                   attrs="{'required': [('stage_seq', '=', 1), ('type', '!=', 'lead')]}"/>
+                        </group>
+                    </page>
+
+                    <!-- Stage 2 -->
+                    <page name="stage2" string="Stage2"  attrs="{'invisible': [('type', '=', 'lead')]}">
+                        <field name="is_lead" invisible="1"/>
+                        <group>
+                            <field name="brand" attrs="{'required': [('stage_seq', '=', 2)]}"/>
+                            <field name="model" attrs="{'required': [('stage_seq', '=', 2)]}"/>
+                            <field name="manufacture_year" attrs="{'required': [('stage_seq', '=', 2)]}"/>
+                            <field name="color" attrs="{'required': [('stage_seq', '=', 2)]}"/>
+                            <field name="paint_condition" attrs="{'required': [('stage_seq', '=', 2)]}"/>
+                            <field name="additional_notes" attrs="{'required': [('stage_seq', '=', 2)]}"/>
+                            <field name="odometer" attrs="{'required': [('stage_seq', '=', 2)]}"/>
+                            <field name="vehicle_category" attrs="{'required': [('stage_seq', '=', 2)]}"/>
+                            <field name="transmission" attrs="{'required': [('stage_seq', '=', 2)]}"/>
+                            <field name="category" attrs="{'required': [('stage_seq', '=', 2)]}"/>
+                            <field name="initial_price" attrs="{'required': [('stage_seq', '=', 2)]}"/>
+                        </group>
+                    </page>
+
+                    <!-- Stage 3 -->
+                    <page name="stage3" string="Stage3" attrs="{'invisible': [('type', '=', 'lead')]}">
+                        <group>
+                            <group string="بيانات امتلاك السياره">
+                                <field name="car_ownership_date" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="engine_type_1" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="engine_type_2" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="accessories" widget="many2many_tags"
+                                       attrs="{'required': [('stage_seq', '=', 3)]}"/>
+
+                                <field name="spare_key" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="average_market_price" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                            </group>
+
+                            <!-- License Details -->
+                            <group string="بيانات الرخصه">
+                                <field name="name_on_license" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="license_plate_number" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="chassis_number" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="traffic_unit" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="engine_number" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="date_of_issue" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="inspection_date" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="expiration_date" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="number_of_powers_of_attorney"
+                                       attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="sale_ban" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="risk_party" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="monthly_installment_value"
+                                       attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                                <field name="cash_payment_amount" attrs="{'required': [('stage_seq', '=', 3)]}"/>
+                            </group>
+
+                        </group>
+
+                        <group string="معلومات الصيانة:">
+                            <field name="maintenance_location"/>
+                            <field name="chosen_location"/>
+                            <field name="maintenance_notes"/>
+                            <field name="license_front_image" widget="many2many_binary"/>
+                            <field name="license_back_image" widget="many2many_binary"/>
+                            <field name="owner_id_card_image" widget="many2many_binary"/>
+                            <field name="power_of_attorney_image" widget="many2many_binary"/>
+                            <field name="maintenance_invoices_image" widget="many2many_binary"/>
+                            <field name="license_inquiry_image" widget="many2many_binary"/>
+                            <field name="power_of_attorney_receipt_image" widget="many2many_binary"/>
+                            <field name="additional_image" widget="many2many_binary"/>
+                        </group>
+                    </page>
+
+                    <!-- Stage 4 -->
+                    <page name="stage4" string="Stage4" attrs="{'invisible': [('type', '=', 'lead')]}">
+                        <group>
+                            <!-- External body parts -->
+                            <group string="الاجزاء الخارجيه" colspan="4">
+                                <group>
+                                    <field name="right_front_fender" widget="radio"/>
+                                    <field name="right_front_door" widget="radio"/>
+                                    <field name="right_rear_door" widget="radio"/>
+                                    <field name="right_rear_fender" widget="radio"/>
+                                </group>
+                                <group>
+                                    <field name="hood" widget="radio"/>
+                                    <field name="roof" widget="radio"/>
+                                    <field name="tail_gate" widget="radio"/>
+                                    <field name="front_bumper" widget="radio"/>
+                                </group>
+                                <group>
+                                    <field name="left_front_fender" widget="radio"/>
+                                    <field name="left_front_door" widget="radio"/>
+                                    <field name="left_rear_door" widget="radio"/>
+                                    <field name="left_rear_fender" widget="radio"/>
+                                </group>
+                                <group>
+                                    <field name="rear_bumper" widget="radio"/>
+                                </group>
+                            </group>
+
+                            <!-- Exterior Accessories -->
+                            <group string="الهيكل الخارجي ( الاكسسوارات الخارجية )     قسم السمكره والدهان" colspan="4">
+                                <group>
+                                    <field name="right_front_headlight" widget="radio"/>
+                                    <field name="left_front_headlight" widget="radio"/>
+                                    <field name="right_front_fog" widget="radio"/>
+                                    <field name="left_front_fog" widget="radio"/>
+                                    <field name="front_grill" widget="radio"/>
+                                    <field name="right_front_mirror" widget="radio"/>
+                                    <field name="left_front_mirror" widget="radio"/>
+                                    <field name="right_rear_headlight" widget="radio"/>
+                                    <field name="left_rear_headlight" widget="radio"/>
+                                </group>
+                                <group>
+                                    <field name="windshield" widget="radio"/>
+                                    <field name="rear_glass" widget="radio"/>
+                                    <field name="right_front_door_glass" widget="radio"/>
+                                    <field name="right_rear_door_glass" widget="radio"/>
+                                    <field name="left_front_door_glass" widget="radio"/>
+                                    <field name="left_rear_door_glass" widget="radio"/>
+                                    <field name="plate_back_light" widget="radio"/>
+                                    <field name="door_strips" widget="radio"/>
+                                </group>
+                            </group>
+
+                            <!-- Interior Parts -->
+                            <group string="الهيكل الداخلي  ( الاجزاء الداخلية للسيارة )    قسم السمكرة والدهان"
+                                   colspan="4">
+                                <group>
+                                    <field name="front_shutter" widget="radio"/>
+                                    <field name="front_left_chassis" widget="radio"/>
+                                    <field name="front_right_chassis" widget="radio"/>
+                                    <field name="right_cartira" widget="radio"/>
+                                    <field name="left_cartira" widget="radio"/>
+                                    <field name="front_right_frame" widget="radio"/>
+                                    <field name="middle_right_frame" widget="radio"/>
+                                    <field name="rear_right_frame" widget="radio"/>
+                                </group>
+                                <group>
+                                    <field name="rear_fender_right" widget="radio"/>
+                                    <field name="right_trunk_sword" widget="radio"/>
+                                    <field name="trunk_shutter" widget="radio"/>
+                                    <field name="spare_wheel_case" widget="radio"/>
+                                    <field name="rear_left_chassis" widget="radio"/>
+                                    <field name="rear_right_chassis" widget="radio"/>
+                                    <field name="left_trunk_sword" widget="radio"/>
+                                    <field name="rear_fender_left" widget="radio"/>
+                                </group>
+                                <group>
+                                    <field name="rear_left_frame" widget="radio"/>
+                                    <field name="middle_left_frame" widget="radio"/>
+                                    <field name="front_left_frame" widget="radio"/>
+                                </group>
+                            </group>
+
+                            <!-- Available Parts -->
+                            <group string="الكماليات ( الاجزاء الداخلية والخارجية  للسيارة )" colspan="4">
+                                <group>
+                                    <field name="sun_roof" widget="radio"/>
+                                    <field name="sun_roof_status" widget="radio"
+                                           attrs="{'invisible': [('sun_roof', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="internal_lights" widget="radio"/>
+                                    <field name="internal_lights_status" widget="radio"
+                                           attrs="{'invisible': [('internal_lights', '!=', 'available')]}"/>
+                                </group>
+
+                                <group>
+                                    <field name="black_out_mirror" widget="radio"/>
+                                    <field name="black_out_mirror_status" widget="radio"
+                                           attrs="{'invisible': [('black_out_mirror', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="dashboard" widget="radio"/>
+                                    <field name="dashboard_status" widget="radio"
+                                           attrs="{'invisible': [('dashboard', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="multi_function" widget="radio"/>
+                                    <field name="multi_function_status" widget="radio"
+                                           attrs="{'invisible': [('multi_function', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="electric_mirrors" widget="radio"/>
+                                    <field name="electric_mirrors_status" widget="radio"
+                                           attrs="{'invisible': [('electric_mirrors', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="electric_windows" widget="radio"/>
+                                    <field name="electric_windows_status" widget="radio"
+                                           attrs="{'invisible': [('electric_windows', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="abs_ebd" widget="radio"/>
+                                    <field name="abs_ebd_status" widget="radio"
+                                           attrs="{'invisible': [('abs_ebd', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="windshield_wiper" widget="radio"/>
+                                    <field name="windshield_wiper_status" widget="radio"
+                                           attrs="{'invisible': [('windshield_wiper', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="sensor_park" widget="radio"/>
+                                    <field name="sensor_park_status" widget="radio"
+                                           attrs="{'invisible': [('sensor_park', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="ambient_air" widget="radio"/>
+                                    <field name="ambient_air_status" widget="radio"
+                                           attrs="{'invisible': [('ambient_air', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="rear_camera" widget="radio"/>
+                                    <field name="rear_camera_status" widget="radio"
+                                           attrs="{'invisible': [('rear_camera', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="screen" widget="radio"/>
+                                    <field name="screen_status" widget="radio"
+                                           attrs="{'invisible': [('screen', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="air_condition" widget="radio"/>
+                                    <field name="air_condition_status" widget="radio"
+                                           attrs="{'invisible': [('air_condition', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="electric_seat" widget="radio"/>
+                                    <field name="electric_seat_status" widget="radio"
+                                           attrs="{'invisible': [('electric_seat', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="mirror_folding" widget="radio"/>
+                                    <field name="mirror_folding_status" widget="radio"
+                                           attrs="{'invisible': [('mirror_folding', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="centre_lock" widget="radio"/>
+                                    <field name="centre_lock_status" widget="radio"
+                                           attrs="{'invisible': [('centre_lock', '!=', 'available')]}"/>
+                                </group>
+                                <group string="Lighting">
+                                    <field name="headlight" widget="radio"/>
+                                    <field name="headlight_status" widget="radio"
+                                           attrs="{'invisible': [('headlight', '!=', 'available')]}"/>
+                                    <field name="rear_light" widget="radio"/>
+                                    <field name="rear_light_status" widget="radio"
+                                           attrs="{'invisible': [('rear_light', '!=', 'available')]}"/>
+                                </group>
+                                <group string="Heating">
+                                    <field name="heating_seat" widget="radio"/>
+                                    <field name="heating_seat_status" widget="radio"
+                                           attrs="{'invisible': [('heating_seat', '!=', 'available')]}"/>
+                                </group>
+                                <group string="Wipers">
+                                    <field name="rear_windshield_wiper" widget="radio"/>
+                                    <field name="rear_windshield_wiper_status" widget="radio"
+                                           attrs="{'invisible': [('rear_windshield_wiper', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="interior_condition" widget="radio"/>
+                                    <field name="interior_condition_status" widget="radio"
+                                           attrs="{'invisible': [('interior_condition', '!=', 'available')]}"/>
+                                    <field name="dashboard_condition" widget="radio"/>
+                                    <field name="dashboard_condition_status" widget="radio"
+                                           attrs="{'invisible': [('dashboard_condition', '!=', 'available')]}"/>
+                                </group>
+                                <group>
+                                    <field name="side_support" widget="radio"/>
+                                    <field name="side_support_status" widget="radio"
+                                           attrs="{'invisible': [('side_support', '!=', 'available')]}"/>
+                                    <field name="seat_belts" widget="radio"/>
+                                    <field name="seat_belts_status" widget="radio"
+                                           attrs="{'invisible': [('seat_belts', '!=', 'available')]}"/>
+                                </group>
+                            </group>
+
+                            <!-- Engine and Transmission -->
+                            <group string=" محرك -  الفتيس -" colspan="4">
+                                <group>
+                                    <field name="engine_condition" widget="radio"/>
+                                    <field name="engine_seal" widget="radio"/>
+                                    <field name="oil_leak" widget="radio"/>
+
+
+                                </group>
+                                <group>
+                                    <field name="periodic_maintenance" widget="radio"/>
+                                    <field name="cooling_system" widget="radio"/>
+                                    <field name="ac_system" widget="radio"/>
+                                    <field name="gearbox_test" widget="radio"/>
+                                </group>
+                            </group>
+
+                            <!-- Suspension -->
+                            <group string="العفشة" colspan="4">
+                                <group>
+                                    <field name="chassis_general_condition" widget="radio"/>
+                                    <field name="brake_cycle_test" widget="radio"/>
+                                    <field name="front_shock_absorbers" widget="radio"/>
+
+                                </group>
+                                <group>
+                                    <field name="rear_shock_absorbers" widget="radio"/>
+                                    <field name="mounts_condition" widget="radio"/>
+                                </group>
+                            </group>
+                            <label for="any_note"/>
+                            <field name="any_note"/>
+                        </group>
+                    </page>
+
+                    <!-- Stage 5 -->
+                    <page name="stage5" string="Stage5" attrs="{'invisible': [('type', '=', 'lead')]}">
+                        <group>
+                            <field name="notes_test_drive" attrs="{'required': [('stage_seq', '=', 5)]}"/>
+                            <field name="attach_diagnostic_report" widget="many2many_binary"
+                                   attrs="{'required': [('stage_seq', '=', 5)]}"/>
+                        </group>
+                        <!--                        <group>-->
+
+                        <field name="inspection_table" widget="section_and_note_one2many" nolabel="1">
+                            <tree string="Inspection Table" editable="bottom">
+                                <field name="item_number"/>
+                                <field name="recommendation" optional="hide"/>
+                                <field name="old_or_damaged_part" optional="show"/>
+                                <field name="new_or_repaired_part" optional="show"/>
+                                <field name="work_done" optional="hide"/>
+                                <field name="cost" optional="show"/>
+                                <field name="repair_location" optional="hide"/>
+                                <field name="invoice" optional="show"/>
+                                <field name="location" optional="hide"/>
+                                <field name="telephone" optional="hide"/>
+                                <field name="remarks" optional="show"/>
+                            </tree>
+                        </field>
+                        <!--                        </group>-->
+                        <group>
+                            <field name="attach_notes_images" widget="many2many_binary"
+                                   attrs="{'required': [('stage_seq', '=', 5)]}"/>
+                        </group>
+                        <!-- Add fields for Stage 5 with required attributes -->
+                    </page>
+
+                    <!-- Stage 6 -->
+                    <page name="stage6" string="Stage6" attrs="{'invisible': [('type', '=', 'lead')]}">
+                        <group>
+
+
+                            <group>
+                                <field name="final_images" widget="many2many_binary"/>
+                                <field name="final_video" widget="many2many_binary"/>
+                            </group>
+                            <group>
+                                <field name="license_received" widget="radio"/>
+                                <field name="keys_received" widget="radio"/>
+                            </group>
+                        </group>
+                        <!-- Add fields for Stage 6 with required attributes -->
+                    </page>
+                </xpath>
+                <xpath expr="//group[@name='lead_priority']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//sheet//field[@name='lead_properties']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//group[@name='lead_priority']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <label for="partner_id" string="Customer name"/>
+                    <field name="partner_id" placeholder="Customer Name"
+                           attrs="{'invisible': [['type', '!=', 'lead']]}"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

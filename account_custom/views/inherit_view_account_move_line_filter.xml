@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <!-- Inherit the existing search view -->
+        <record id="view_journal_item_filter" model="ir.ui.view">
+            <field name="name">account.move.line.search.inherit</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <!-- Add new filters here -->
+                    <filter string="Audit Pass" name="audit pass" domain="[('parent_state', '=', 'audit_pass')]"/>
+                    <separator/>
+                    <filter string="Audit Not Pass" name="audit not padd" domain="[('parent_state', '=', 'audit_not_pass')]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

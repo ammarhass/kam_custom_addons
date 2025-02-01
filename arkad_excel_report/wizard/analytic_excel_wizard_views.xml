@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="analytic_account_wizard_form_view" model="ir.ui.view">
+            <field name="name">analytic.account.wizard.form.view</field>
+            <field name="model">analytic.account.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="analytic_account_id"/>
+                        <field name="account_id"/>
+                    </group>
+                    <footer>
+                        <button name="account_fun" type="object" string="print"
+                                class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn btn-second"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="analytic_wizard_action" model="ir.actions.act_window">
+            <field name="name">Print Analytic Report</field>
+            <field name="res_model">analytic.account.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <record id="analytic_account_wizard_action_open" model="ir.actions.act_window">
+            <field name="name">Analytic Account account</field>
+            <field name="res_model">analytic.account.wizard</field>
+            <field name="binding_model_id" ref="analytic.model_account_analytic_account"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="arkad_excel_report.analytic_account_wizard_form_view"/>
+            <field name="context">{'default_analytic_account_id': active_id}</field>
+            <field name="target">new</field>
+        </record>
+
+
+    </data>
+</odoo>

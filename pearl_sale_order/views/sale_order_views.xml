@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+
+        <record id="inherit_view_quotation_tree" model="ir.ui.view">
+            <field name="name">inherit.view.quotation.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="phase_approval" optional="hide" decoration-success="phase_approval == 'third'"
+                    decoration-info="phase_approval == 'first' or phase_approval == 'second'"
+                    widget="badge"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template">
+
+    <t t-name="ClosePosPopupInherit" t-inherit="point_of_sale.ClosePosPopup" t-inherit-mode="extension" owl="1">
+
+        <xpath expr="//div[hasclass('total-orders')]" position="attributes">
+            <attribute name="t-if">env.pos.user.role == 'manager'</attribute>
+        </xpath>
+
+        <xpath expr="//div[hasclass('payment-methods-overview')]" position="attributes">
+            <attribute name="t-if">env.pos.user.role == 'manager'</attribute>
+        </xpath>
+
+        <xpath expr="//div[hasclass('small')]" position="attributes">
+            <attribute name="t-if">env.pos.user.role == 'manager'</attribute>
+        </xpath>
+
+        <xpath expr="//div[@t-if='env.proxy.printer']" position="replace">
+            <div t-if="env.proxy.printer and env.pos.user.role == 'manager'" class="small button icon">
+                <SaleDetailsButton/>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[@t-on-click='closePos']" position="attributes">
+            <attribute name="t-if">env.pos.user.role == 'manager'</attribute>
+        </xpath>
+
+    </t>
+
+</templates>

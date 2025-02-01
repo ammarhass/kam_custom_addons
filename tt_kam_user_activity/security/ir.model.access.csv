@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_tt_user_report_tt_user_report_test,tt_user_report.tt_user_report_test,model_user_activity_report,,1,1,1,1

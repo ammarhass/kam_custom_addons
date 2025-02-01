@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="inherit_hr_overtime_rule_view_form_custom" model="ir.ui.view">
+            <field name="name">inherit.hr.overtime.rule.view.form.custom</field>
+            <field name="model">hr.overtime.rule</field>
+            <field name="inherit_id" ref="tt_hr_lib.hr_overtime_rule_view_form"/>
+            <field name="arch" type="xml">
+                <page name="rule_details" position="after">
+                    <page name="employees_list" string="Employees">
+                        <field name="employee_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </page>
+
+            </field>
+        </record>
+    </data>
+</odoo>

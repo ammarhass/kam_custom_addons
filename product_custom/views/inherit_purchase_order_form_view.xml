@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record id="inherit_purchase_order_form_view" model="ir.ui.view">
+            <field name="name">inherit.purchase.order.form.view</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='products']//field[@name='order_line']//tree//field[@name='product_packaging_qty']"
+                       position="before">
+                    <field name="white_rice_quantity" optional="hide"/>
+                    <field name="fraction_quantity" optional="hide"/>
+                    <field name="good_rice_quantity" optional="hide"/>
+                    <field name="net_value" optional="hide" widget="percentage"/>
+                    <field name="fraction_value" optional="hide" widget="percentage"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+</odoo>

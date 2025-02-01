@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+
+        <record id="decimal_precision_multi_company_rule" model="ir.rule">
+            <field name="name">Account Asset Category multi-company</field>
+            <field ref="model_decimal_precision" name="model_id"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">[('company_id', '=', company_id)]</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <record id="product_supplierinfo_inherit_tree_view_" model="ir.ui.view">
+            <field name="name">product.supplierinfo.inherit.tree.view</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="price" position="before">
+                    <field name="white_rice_quantity" optional="hide" sum="Total Qty"/>
+                    <field name="fraction_quantity" optional="hide" sum="Total Qty"/>
+                    <field name="good_rice_quantity" optional="hide" sum="Total Qty"/>
+                    <field name="fraction_value" optional="hide" widget="percentage"/>
+                    <field name="net_value" optional="hide" widget="percentage"/>
+                    <field name="date" optional="hide"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

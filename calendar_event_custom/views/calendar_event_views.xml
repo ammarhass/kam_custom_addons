@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherit_event_calendar_form_view" model="ir.ui.view">
+            <field name="name">inherit.event.calendar.form.view</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location']" position="attributes">
+                    <attribute name="string">Address
+                    </attribute>
+                </xpath>
+                <xpath expr="//field[@name='location']" position="before">
+                    <field name="address" widget="url" string="Location"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

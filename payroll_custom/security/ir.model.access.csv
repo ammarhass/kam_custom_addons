@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+payroll_activity,payroll_activity.payroll_activity,model_payroll_activity,,1,1,1,1

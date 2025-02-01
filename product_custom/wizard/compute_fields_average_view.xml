@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+
+        <record id="fields_average_wizard_form" model="ir.ui.view">
+            <field name="name">fields.average.wizard.form</field>
+            <field name="model">fields.average</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group string="Dates">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group string="Vendors">
+                            <field name="partner_ids" widget="many2many_tags"/>
+                        </group>
+                        <group string="Total">
+                            <field name="total_quantity"/>
+                            <field name="total_white_rice"/>
+                            <field name="total_fraction"/>
+                            <field name="total_soft_fraction" string="Total Soft Fraction"/>
+                            <field name="total_hard_fraction" string="Total Hard Fraction"/>
+                            <field name="total_good_rice"/>
+                            <field name="rageaa"/>
+                            <field name="hadr"/>
+                            <field name="sersa"/>
+                        </group>
+                        <group string="Average">
+                            <field name="white_rice_average"/>
+                            <field name="fraction_average"/>
+                            <field name="good_rice_average"/>
+                            <field name="barley_rice_average"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Compute" type="object" name="compute_all_fields_average"/>
+                        <button string="Cancel" special="cancel" class="btn btn-second"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="fields_average_wizard_actions" model="ir.actions.act_window">
+            <field name="name">Compute Fields Average</field>
+            <field name="res_model">fields.average</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <record id="Wizard_server_action_window" model="ir.actions.server">
+            <field name="name">Compute Total Average</field>
+            <field name="model_id" ref="product_custom.model_fields_average"/>
+            <field name="binding_model_id" ref="product.model_product_template"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['purchase.order'].wiz_open()
+            </field>
+        </record>
+
+    </data>
+</odoo>

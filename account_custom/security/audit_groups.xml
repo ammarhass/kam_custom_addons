@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record id="audited_accepted_groups_category" model="ir.module.category">
+            <field name="name">Audited and Accepted</field>
+        </record>
+
+        <record id="audit_normal_group" model="res.groups">
+            <field name="name">Audited User</field>
+            <field name="category_id" ref="audited_accepted_groups_category"/>
+        </record>
+        <record id="accepted_normal_group" model="res.groups">
+            <field name="name">Accepted User</field>
+            <field name="category_id" ref="audited_accepted_groups_category"/>
+        </record>
+
+        <record id="bulk_audited_bulk_accepted_groups_category" model="ir.module.category">
+            <field name="name">Bulk (Audited &amp; Accepted)</field>
+        </record>
+
+        <record id="bulk_audit_normal_group" model="res.groups">
+            <field name="name">Bulk Audited User</field>
+            <field name="category_id" ref="bulk_audited_bulk_accepted_groups_category"/>
+        </record>
+        <record id="bulk_accepted_normal_group" model="res.groups">
+            <field name="name">Bulk Accepted User</field>
+            <field name="category_id" ref="bulk_audited_bulk_accepted_groups_category"/>
+        </record>
+
+        <!--        <record id="audited_accepted_normal_group" model="res.groups">-->
+        <!--            <field name="name">Full Access User</field>-->
+        <!--            <field name="category_id" ref="audited_accepted_groups_category"/>-->
+        <!--&lt;!&ndash;            <field name="implied_ids" eval="[(4, ref('audit_normal_group', 'accepted_normal_group'))]"/>&ndash;&gt;-->
+        <!--        </record>-->
+    </data>
+</odoo>

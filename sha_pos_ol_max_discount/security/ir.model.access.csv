@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sha_pos_ol_max_discount_sha_pos_ol_max_discount,sha_pos_ol_max_discount.sha_pos_ol_max_discount,model_sha_pos_ol_max_discount_sha_pos_ol_max_discount,base.group_user,1,1,1,1

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_hr_custody_request_form_view" model="ir.ui.view">
+            <field name="name">inherit.hr.custody.request.form.view</field>
+            <field name="model">hr.custody.request</field>
+            <field name="inherit_id" ref="tt_hr_lib.hr_custody_request_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="domain">[('custody_eligible', '=', True)]</attribute>
+                </xpath>
+                <xpath expr="//field[@name='requested_value']" position="after">
+                    <field name="is_first_approval" invisible="1"/>
+                    <field name="is_second_approval" invisible="1"/>
+                    <field name="first_approval"/>
+                    <field name="second_approval"/>
+                </xpath>
+                <xpath expr="//button[@name='set_approved']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('is_second_approval', '=', False), ('state', '!=', 'first_approve')]}</attribute>
+                    <attribute name="groups"></attribute>
+                    <attribute name="states"></attribute>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button name="action_first_approve" string="First Approve" type="object" class="oe_highlight"
+                             attrs="{'invisible':['|', ('is_first_approval', '=', False), ('state', '!=', 'draft')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_hr_custody_request_tree_view" model="ir.ui.view">
+            <field name="name">inherit.hr.custody.request.tree.view</field>
+            <field name="model">hr.custody.request</field>
+            <field name="inherit_id" ref="tt_hr_lib.hr_custody_request_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='requested_value']" position="after">
+                    <field name="is_first_approval" invisible="1"/>
+                    <field name="is_second_approval" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

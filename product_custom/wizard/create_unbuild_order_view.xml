@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="create_unbuild_order_form_view" model="ir.ui.view">
+            <field name="name">create.unbuild.order.form.view</field>
+            <field name="model">create.unbuild.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="white_rice"/>
+                        <field name="actual_fraction_value" widget="percentage"/>
+                        <field name="actual_quantity"/>
+                    </group>
+                    <footer>
+                        <button string="Compute" type="object" name="test"/>
+                        <button string="Cancel" special="cancel" class="btn btn-second"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="create_unbuild_order_action" model="ir.actions.act_window">
+            <field name="name">Create Unbuild Order</field>
+            <field name="res_model">create.unbuild.order</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <record id="create_unbuild_order_server_action_window" model="ir.actions.server">
+            <field name="name">Create Unbuild Order</field>
+            <field name="model_id" ref="product_custom.model_create_unbuild_order"/>
+            <field name="binding_model_id" ref="product.model_product_template"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['purchase.order'].wiz_open2()
+            </field>
+        </record>
+
+    </data>
+</odoo>

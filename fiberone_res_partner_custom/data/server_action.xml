@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+
+        <record id="update_partner_reference" model="ir.actions.server">
+            <field name="name">Update Partner's Reference</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="binding_model_id" ref="base.model_res_partner"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="state">code</field>
+            <field name="code">
+action = env['res.partner'].update_product_sequence()
+            </field>
+        </record>
+    </data>
+</odoo>

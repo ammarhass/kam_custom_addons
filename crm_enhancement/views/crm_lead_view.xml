@@ -1,0 +1,122 @@
+<odoo>
+    <data>
+        <record id="crm_lead_form_inherit_crm_stages_rule" model="ir.rule">
+            <field name="name">CRM Lead Form for CRM Stages Group</field>
+            <field name="model_id" ref="base.model_ir_ui_view"/>
+            <field name="domain_force">[('id', '=', ref('partner_enhancement.crm_lead_form_inherit'))]</field>
+            <field name="groups" eval="[(4, ref('crm_enhancement.crm_stage'))]"/>
+        </record>
+
+        <record id="crm_lead_form_default_rule" model="ir.rule">
+            <field name="name">Default CRM Lead Form for Other Users</field>
+            <field name="model_id" ref="base.model_ir_ui_view"/>
+            <field name="domain_force">[('id', '=', ref('crm.crm_lead_view_form'))]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="crm.crm_lead_view_form" model="ir.ui.view">
+            <field name="priority">10</field>
+        </record>
+        <record id="crm_lead_form_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='campaign_id']" position="attributes">
+                    <attribute name="string">Project</attribute>
+                </xpath>
+                <xpath expr="//field[@name='team_id']" position="after">
+                    <field name="communication_method"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//label[@for='street']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='website']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='partner_name']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+
+                </xpath>
+                <xpath expr="//div[hasclass('o_address_format')]" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_title')]//div[4]" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+
+                <xpath expr="//group[@name='lead_info']" position="replace">
+                    <group name="lead_info" attrs="{'invisible': [('type', '=', 'opportunity')]}">
+
+
+                        <label for="email_from_group_lead_info" class="oe_inline"/>
+                        <div class="o_row o_row_readonly">
+                            <button name="mail_action_blacklist_remove" class="fa fa-ban text-danger"
+                                    title="This email is blacklisted for mass mailings. Click to unblacklist."
+                                    type="object" context="{'default_email': email_from}" groups="base.group_user"
+                                    attrs="{'invisible': [('is_blacklisted', '=', False)]}"/>
+                            <field name="email_from" id="email_from_group_lead_info" string="Email" widget="email"/>
+                            <span class="fa fa-exclamation-triangle text-warning oe_edit_only"
+                                  title="By saving this change, the customer email will also be updated."
+                                  attrs="{'invisible': [('partner_email_update', '=', False)]}"/>
+                        </div>
+
+                        <label for="mobile" class="oe_inline"/>
+                        <div class="o_row o_row_readonly">
+                            <button name="phone_action_blacklist_remove" class="fa fa-ban text-danger"
+                                    title="This phone number is blacklisted for SMS Marketing. Click to unblacklist."
+                                    type="object" context="{'default_phone': mobile}" groups="base.group_user"
+                                    attrs="{'invisible': [('mobile_blacklisted', '=', False)]}"/>
+                            <field name="mobile" widget="phone" string="Mobile"/>
+                        </div>
+                    </group>
+                </xpath>
+                <xpath expr="//page[@name='internal_notes']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='extra']" position="after">
+                    <page name="stage1" string="Stage1" attrs="{'invisible': [('type', '=', 'opportunity')]}">
+                        <field name="is_lead" invisible="1"/>
+                        <group>
+                            <field name="cus_name" attrs="{'required': [('is_lead', '=', True)]}"/>
+                            <field name="cus_phone" attrs="{'required': [('is_lead', '=', True)]}"/>
+
+                            <field name="alt_phone"/>
+                            <field name="cus_region" attrs="{'required': [('is_lead', '=', True)]}"/>
+                            <field name="cus_source" attrs="{'required': [('is_lead', '=', True)]}"/>
+                            <field name="project_name" attrs="{'required': [('is_lead', '=', True)]}"/>
+                            <field name="communication_method_stage" attrs="{'required': [('is_lead', '=', True)]}"/>
+
+                        </group>
+
+                    </page>
+
+                </xpath>
+                <xpath expr="//group[@name='lead_priority']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//sheet//field[@name='lead_properties']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//group[@name='lead_priority']" position="attributes">
+                    <attribute name="attrs">{'invisible': [['type', '=', 'lead']]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <label for="partner_id" string="Customer name"/>
+                    <field name="partner_id" placeholder="Customer Name"
+                           attrs="{'invisible': [['type', '!=', 'lead']]}"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

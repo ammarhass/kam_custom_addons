@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+        <record id="crm_stage" model="res.groups">
+            <field name="name">Group CRM Stage</field>
+
+        </record>
+    </data>
+</odoo>

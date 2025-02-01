@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="inherit_product_category_form_view_elhegaz" model="ir.ui.view">
+            <field name="name">inherit.product.category.form.view</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <field name="property_account_expense_categ_id" position="after">
+                    <field name="branch_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

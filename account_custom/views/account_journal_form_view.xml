@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+
+        <record id="inherit_account_journal_form_view_test4" model="ir.ui.view">
+            <field name="name">inherit.account.journal.form.view.test</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <field name="restrict_mode_hash_table" position="attributes">
+                    <attribute name="attrs">{}</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

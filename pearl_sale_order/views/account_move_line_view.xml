@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+
+        <record id="inherit_account_move_form_view_pearl" model="ir.ui.view">
+            <field name="name">inherit.account.move.form.view.pearl</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='invoice_tab']//field[@name='invoice_line_ids']//tree//field[@name='name']" position="after">
+                    <field name="brand_id" string="Brand"/>
+                    <field name="product_categ_id" optional="hide"/>
+                    <field name="product_tag_ids" widget="many2many_tags" optional="hide"/>
+                </xpath>
+            </field>
+
+        </record>
+    </data>
+</odoo>

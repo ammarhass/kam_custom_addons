@@ -1,0 +1,42 @@
+
+.receipt_table {
+    margin-bottom:5px!important;
+    width:100%;
+    text-align:center!important;
+    font-size:12px!important;
+    border:2px solid black;
+}
+
+.th_receipt {
+    border:2px solid black;
+    padding:2px;
+}
+.width40 {
+    width:50%;
+}
+.td_receipt {
+    border:2px solid black;
+    padding:1px;
+}
+.td_receipt_tot {
+    padding:1px;
+}
+.pos-receipt-right-align {
+    display:none !important;
+}
+
+.receipt_summary {
+    width:100% !important;
+    text-align:right!important;
+    direction: rtl!important;
+}
+
+.receipt_total {
+    font-size:13px;
+    width:100%;
+    text-align:right;
+}
+.orderlines {
+    margin-bottom:0px !important;
+    padding-bottom:0px !important;
+}

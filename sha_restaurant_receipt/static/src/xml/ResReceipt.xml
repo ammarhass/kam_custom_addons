@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template">
+
+    <t t-name="ResReceipt" owl="1">
+        <style>
+
+        </style>
+        <t t-foreach="order_changes" t-as="changes" t-key="changes.index">
+            <div class="pos-receipt container">
+                <!--            <div class="">-->
+                <div class="pos-receipt-order-data">
+                    <t t-esc="changes.name"/>
+                </div>
+                <t t-if="changes.floor_name || changes.table_name">
+                    <br/>
+                    <div class="pos-receipt-title">
+                        <t t-esc="changes.floor_name"/>
+                        /
+                        <t t-esc="changes.table_name"/>
+                    </div>
+                </t>
+                <br/>
+                <br/>
+
+                <t t-if="changes.cancelled.length > 0">
+                    <div class="pos-order-receipt-cancel">
+                        <div class="pos-receipt-title">
+                            CANCELLED
+                            <t t-esc='changes.time.hours'/>:
+                            <t t-esc='changes.time.minutes'/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <table class="table table-lg" style="text-align: center;width:100%">
+                            <thead>
+                                <th style="text-align:center;width:50%;border:1.5px solid black;padding:2px;">Product</th>
+                                <th style="text-align:center;width:50%;border:1.5px solid black;padding:2px;">Quantity</th>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="changes.cancelled" t-as="change" t-key="change.product_id">
+                                    <tr>
+                                        <td style="text-align:center;width:50%;border:1px solid black;padding:2px;">
+                                            <t t-esc="change.name"/>
+                                        </td>
+                                        <td style="text-align:center;width:50%;border:1px solid black;padding:2px;">
+                                            <t t-esc="change.quantity"/>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="change.note">
+                                        <td style="text-align:center;width:100%;border:1px solid black;padding:2px;background-color:black;color:white;" colspan="2">
+                                            <t t-esc="change.note"/>
+                                        </td>
+                                    </tr>
+
+                                </t>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <br/>
+                    </div>
+                </t>
+
+                <t t-if="changes.new.length > 0">
+                    <div class="pos-receipt-title">
+                        NEW
+                        <t t-esc='changes.time.hours'/>:
+                        <t t-esc='changes.time.minutes'/>
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <table class="table table-lg" style="text-align: center;width:100%">
+                        <thead>
+                            <th style="text-align:center;width:50%;border:1.5px solid black;padding:2px;">Product</th>
+                            <th style="text-align:center;width:50%;border:1.5px solid black;padding:2px;">Quantity</th>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="changes.new" t-as="change" t-key="change.product_id">
+                                <tr>
+                                    <td style="text-align:center;width:50%;border:1px solid black;padding:2px;">
+                                        <t t-esc="change.name"/>
+                                    </td>
+                                    <td style="text-align:center;width:50%;border:1px solid black;padding:2px;">
+                                        <t t-esc="change.quantity"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="change.note">
+                                    <td style="text-align:center;width:100%;border:1px solid black;padding:2px;background-color:black;color:white;" colspan="2">
+                                        <t t-esc="change.note"/>
+                                    </td>
+                                </tr>
+
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <br/>
+                    <br/>
+                </t>
+
+                <t t-if="captain">
+                    <div class="pos-receipt-title">
+                        Captain:
+                        <t t-esc='captain'/>
+                    </div>
+                </t>
+
+            </div>
+            <p style="page-break-after:always!important;"/>
+        </t>
+    </t>
+
+</templates>

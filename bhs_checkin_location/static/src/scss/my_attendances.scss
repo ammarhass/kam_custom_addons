@@ -1,0 +1,36 @@
+.o_hr_attendance_sign_in_out_icon.location_vp2{background-color:#466B8D !important;color:#fff !important}
+
+.o_hr_attendance_kiosk_mode .o_hr_attendance_sign_in_out_icon{
+    box-shadow: none;
+    margin: 0.1em 0 0.1em;
+    padding: 0.15em 0.1em;
+}
+.o_hr_attendance_user_badge{
+    background: #2F64E4 !important;
+    border-radius: 16px 16px 0px 0px !important;
+    width: 100%;
+    height: 69px !important;
+    left: 0px !important;
+}
+.o_hr_attendance_user_badge img{
+     top: -5px !important;
+}
+.o_hr_attendance_kiosk_mode .row{
+     margin-top: -10px;
+}
+.o_hr_attendance_kiosk_mode h1{
+     font-size: 20px !important;
+     margin-top: 4.0rem !important;
+     color: #262D57 !important;
+}
+.o_hr_attendance_kiosk_mode h3{
+     font-size: 18px !important;
+     font-weight: 400;
+}
+.o_hr_attendance_kiosk_mode {
+    border-radius:  0px 0px 16px 16px !important;
+    min-width: 550px;
+}
+.check_in:hover h3{
+     color: #262D57 !important;
+}

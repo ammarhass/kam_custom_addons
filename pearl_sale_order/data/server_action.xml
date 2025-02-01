@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+
+        <record id="sale_order_first_phase_approval" model="ir.actions.server">
+            <field name="name">First Approval</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="groups_id" eval="[(4, ref('pearl_sale_order.sale_order_first_approval_group'))]"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.first_phase_approval()
+            </field>
+        </record>
+
+        <record id="sale_order_second_phase_approval" model="ir.actions.server">
+            <field name="name">Second Approval</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="groups_id" eval="[(4, ref('pearl_sale_order.sale_order_second_approval_group'))]"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.second_phase_approval()
+            </field>
+        </record>
+
+        <record id="sale_order_third_phase_approval" model="ir.actions.server">
+            <field name="name">Third Approval</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="groups_id" eval="[(4, ref('pearl_sale_order.sale_order_third_approval_group'))]"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.third_phase_approval()
+            </field>
+        </record>
+    </data>
+</odoo>

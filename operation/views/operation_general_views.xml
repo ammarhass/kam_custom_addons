@@ -1,0 +1,145 @@
+<odoo>
+    <data>
+
+        <record id="operation_general_from_view" model="ir.ui.view">
+            <field name="name">operation.general.form.view</field>
+            <field name="model">operation.general</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <header>
+                            <button name="action_confirm" type="object" string="Confirm" class="btn-primary" states="draft" groups="operation.operation_access_user_two"/>
+                            <button name="action_submit_to_cost" type="object" string="Submit To Cost"
+                                    states="confirm" groups="operation.operation_access_user_two" class="btn-primary"/>
+                            <button name="action_cost_confirmed" type="object" string="Cost Confirmed" class="btn-primary" states="submit" groups="operation.operation_access_user_three"/>
+                            <button name="action_submit_to_account" type="object" string="Submit To Account" class="btn-primary" states="cost_confirm" groups="operation.operation_access_user_three"/>
+                            <button name="action_account_confirm" type="object" string="Account Confirm" class="btn-primary" states="account_submit" groups="operation.operation_access_user_four"/>
+                            <button name="create_invoice_bill" type="object" string="Create Invoice &amp; Bill" class="btn-primary" states="account_confirm" groups="operation.operation_access_user_four"/>
+<!--                            <button name="create_invoice_bill" type="object" string="Create Invoice &amp; Bill" class="btn-primary"/>-->
+                        </header>
+                        <header>
+                            <field name="state" widget="statusbar"/>
+                        </header>
+                        <group>
+<!--                            <field name="name"/>-->
+                            <field name="user_three_access" invisible="1"/>
+                            <field name="user_four_access" invisible="1"/>
+                        </group>
+                        <notebook>
+                            <page string="General Info" attrs="{'readonly':[('state', '!=', 'draft')]}">
+                                <group>
+                                    <group string="General Info" attrs="{'readonly':[('state', '!=', 'draft')]}">
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="supplier_id" attrs="{'readonly':[('state', '!=', 'draft')]}" domain="[('company_id', '=', company_id)]"/>
+                                        <field name="customer_id" attrs="{'readonly':[('state', '!=', 'draft')]}" domain="[('company_id', '=', company_id)]"/>
+                                        <field name="customer_name" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="po_number" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="truck_type" attrs="{'readonly':[('state', '!=', 'draft')]}" invisible="1"/>
+                                        <field name="truck_type_id" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="driver" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="phone" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="truck_license" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="from_from" string="From" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="to_to" string="To" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="req_date" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                    </group>
+                                    <group string="Loading" attrs="{'readonly':[('state', '!=', 'draft')]}">
+                                        <field name="loading_date" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="loading_arrival_time" attrs="{'readonly':[('state', '!=', 'draft')]}" string="Arrival Time"/>
+                                        <field name="approval_time" attrs="{'readonly':[('state', '!=', 'draft')]}" invisible="1"/>
+                                        <field name="departure_date" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="departure_time" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="over_time" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="over_night" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <group string="Destination">
+                                        <field name="delivery_date" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="arrival_time" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="destination_departure_date" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="destination_departure_time" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="destination_over_time" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="destination_over_night" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                    </group>
+                                    <group string="Delegation">
+                                        <field name="delegates" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="labor" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="drop" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="return_return" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="notes" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="additional_notes" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                        <field name="extra_notes" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="cost" string="Costing" attrs="{'invisible':[('state', 'in', ['confirm', 'draft'])]}">
+                                <group>
+                                    <field name="nolon" string="Nolon" attrs="{'readonly':['|',('state', '==', 'cost_confirm'),('user_three_access', '!=', True)]}"/>
+                                    <field name="custody" string="Custody" attrs="{'readonly':['|',('state', '==', 'cost_confirm'),('user_three_access', '!=', True)]}"/>
+                                    <field name="payment_number" string="Payment Number" attrs="{'readonly':['|',('state', '==', 'cost_confirm'),('user_three_access', '!=', True)]}"/>
+                                    <field name="final_nolon" string="Final Nolon" attrs="{'readonly':['|',('state', '==', 'cost_confirm'),('user_three_access', '!=', True)]}"/>
+                                    <field name="drop_overnight" string="Drop/Overnight" attrs="{'readonly':['|',('state', '==', 'cost_confirm'),('user_three_access', '!=', True)]}"/>
+                                    <field name="labour" string="Labour" attrs="{'readonly':['|',('state', '==', 'cost_confirm'),('user_three_access', '!=', True)]}"/>
+                                    <field name="elastic" attrs="{'readonly':['|',('state', '==', 'cost_confirm'),('user_three_access', '!=', True)]}"/>
+                                    <field name="tolls_and_scales" string="Tolls and Scales" attrs="{'readonly':['|',('state', '==', 'cost_confirm'),('user_three_access', '!=', True)]}"/>
+                                    <field name="commission" string="Commission" attrs="{'readonly':['|',('state', '==', 'cost_confirm'),('user_three_access', '!=', True)]}"/>
+                                    <field name="total_transportation" string="Total Transportation" attrs="{'readonly':['|',('state', '==', 'cost_confirm'),('user_three_access', '!=', True)]}"/>
+                                </group>
+                            </page>
+                            <page name="client_payment" string="Client Payment" attrs="{'invisible':[('state', 'not in', ['account_submit', 'account_confirm', 'final_confirm'])]}">
+                                <group>
+                                    <field name="client_overnight" string="Overnight" attrs="{'readonly':['|',('state', '==', 'final_confirm'),('user_four_access', '!=', True)]}"/>
+                                    <field name="client_drop" string="Drop" attrs="{'readonly':['|',('state', '==', 'final_confirm'),('user_four_access', '!=', True)]}"/>
+                                    <field name="client_return" string="Return" attrs="{'readonly':['|',('state', '==', 'final_confirm'),('user_four_access', '!=', True)]}"/>
+                                    <field name="client_delegate" string="Delegate" attrs="{'readonly':['|',('state', '==', 'final_confirm'),('user_four_access', '!=', True)]}"/>
+                                    <field name="client_labour" string="Labour" attrs="{'readonly':['|',('state', '==', 'final_confirm'),('user_four_access', '!=', True)]}"/>
+                                    <field name="client_nolon" string="Nolon" attrs="{'readonly':['|',('state', '==', 'final_confirm'),('user_four_access', '!=', True)]}"/>
+                                    <field name="client_total" string="Total" attrs="{'readonly':['|',('state', '==', 'final_confirm'),('user_four_access', '!=', True)]}"/>
+                                    <field name="road_crossing" string="Road Crossing" attrs="{'readonly':['|',('state', '==', 'final_confirm'),('user_four_access', '!=', True)]}"/>
+                                </group>
+                            </page>
+                            <page name="accounts" string="Accounts Configuration" attrs="{'invisible':[('state', 'not in', ['account_submit', 'account_confirm', 'final_confirm'])]}">
+                                <group>
+                                    <field name="total_account_id"/>
+                                    <field name="road_crossing_account_id"/>
+                                    <field name="total_transportation_account_id"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="operation_general_tree_view" model="ir.ui.view">
+            <field name="name">operation.general.form.view</field>
+            <field name="model">operation.general</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="supplier_id"/>
+                    <field name="customer_id"/>
+                    <field name="customer_name"/>
+                    <field name="truck_type"/>
+                    <field name="driver"/>
+                    <field name="from_from"/>
+                    <field name="to_to"/>
+                    <field name="req_date"/>
+                    <field name="client_total"/>
+                    <field name="road_crossing"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="operation_general_action" model="ir.actions.act_window">
+            <field name="name">Operations</field>
+            <field name="res_model">operation.general</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="operation_root_menu" name="Operations"/>
+        <menuitem id="operation_menu" name="Operations"
+                  parent="operation_root_menu" action="operation_general_action"/>
+    </data>
+</odoo>

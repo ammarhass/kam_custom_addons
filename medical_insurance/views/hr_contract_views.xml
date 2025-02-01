@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="medical_hr_contract_form_inherit" model="ir.ui.view">
+            <field name="name">medical.hr.contract.view.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+               <xpath expr="//notebook" position="inside">
+                    <page string="Medical Insurance">
+                        <group>
+                            <field name="medical_insurance_id"/>
+                            <field name="layers_ids" invisible="1"/>
+                            <field name="layer_id" domain="[('id', 'in', layers_ids)]"/>
+                            <field name="medical_amount"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- QWeb Reports -->
+        <!-- NAME & FILE_NAME should be the same -->
+        <report
+                id="user_activity_report"
+                model="user.activity.report"
+                report_type="qweb-pdf"
+                string="User Activity Report"
+                name="tt_kam_user_activity.user_activity_template"
+                file="tt_kam_user_activity.user_activity_template"
+        />
+
+
+        <template id='user_activity_template'>
+            <t t-call='web.html_container'>
+                <t t-call="web.external_layout">
+                    <div class='page'>
+                        <div align="center">
+                            <!--                            <h2>-->
+                            <!--                                <span t-esc="docs.user_id.name"/>-->
+                            <!--                                Activity Report-->
+                            <!--                            </h2>-->
+                        </div>
+                        <t t-if="len(journal_entries) != 0">
+                            <h1>Journal Entries</h1>
+                            <table class="table table-bordered mb64">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Entry Name</th>
+                                        <th scope="col">Journal</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">approved user</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach='journal_entries' t-as='JE'>
+                                        <tr>
+                                            <td>
+                                                <span t-esc="JE.create_uid.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="JE.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="JE.journal_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="JE.date"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="JE.company_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="JE.write_uid.name"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <t t-if="len(customer_invoices) != 0">
+                            <h1>Customer Invoices</h1>
+                            <table class="table table-bordered mb64">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Invoice Number</th>
+                                        <!--                                        <th scope="col">Reference</th>-->
+                                        <th scope="col">Total Without Tax</th>
+                                        <th scope="col">Currency</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">approved user</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach='customer_invoices' t-as='CI'>
+                                        <tr>
+                                            <td>
+                                                <span t-esc="CI.create_uid.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="CI.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="CI.amount_untaxed"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="CI.currency_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="CI.invoice_date"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="CI.company_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="CI.write_uid.name"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+
+                        <!--                            <t t-if="len(sale_receipts) != 0">-->
+                        <!--                                <h3>Sale Receipts</h3>-->
+                        <!--                                <table class="table table-bordered">-->
+                        <!--                                    <thead>-->
+                        <!--                                        <tr>-->
+                        <!--                                            <th scope="col">User</th>-->
+                        <!--                                            <th scope="col">Receipt Number</th>-->
+                        <!--                                            <th scope="col">Reference</th>-->
+                        <!--                                            <th scope="col">Total Without Tax</th>-->
+                        <!--                                            <th scope="col">Currency</th>-->
+                        <!--                                            <th scope="col">Date</th>-->
+                        <!--                                            <th scope="col">Company</th>-->
+                        <!--                                            <th scope="col">approved user</th>-->
+                        <!--                                        </tr>-->
+                        <!--                                    </thead>-->
+                        <!--                                    <tbody>-->
+                        <!--                                        <t t-foreach='sale_receipts' t-as='SR'>-->
+                        <!--                                            <tr>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="SR.create_uid.name"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="SR.number"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="SR.amount - SR.tax_amount"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="SR.currency_id.name"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="SR.date"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="SR.company_id.name"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="SR.write_uid.name"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                            </tr>-->
+                        <!--                                        </t>-->
+                        <!--                                    </tbody>-->
+                        <!--                                </table>-->
+                        <!--                            </t>-->
+                        <!--                        </t>-->
+                        <t t-if="len(vendor_bills) != 0">
+                            <h1>Vendor Bill</h1>
+                            <table class="table table-bordered mb64">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Bill Number</th>
+                                        <!--                                        <th scope="col">Reference</th>-->
+                                        <th scope="col">Total Without Tax</th>
+                                        <th scope="col">Currency</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">approved user</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach='vendor_bills' t-as='VB'>
+                                        <tr>
+                                            <td>
+                                                <span t-esc="VB.create_uid.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="VB.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="VB.amount_untaxed"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="VB.currency_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="VB.invoice_date"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="VB.company_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="VB.write_uid.name"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <!--                            <t t-if="len(purchase_receipts) != 0">-->
+                        <!--                                <h3>Purchase Receipts</h3>-->
+                        <!--                                <table class="table table-bordered">-->
+                        <!--                                    <thead>-->
+                        <!--                                        <tr>-->
+                        <!--                                            <th scope="col">User</th>-->
+                        <!--                                            <th scope="col">Receipt Number</th>-->
+                        <!--                                            <th scope="col">Reference</th>-->
+                        <!--                                            <th scope="col">Total Without Tax</th>-->
+                        <!--                                            <th scope="col">Currency</th>-->
+                        <!--                                            <th scope="col">Date</th>-->
+                        <!--                                            <th scope="col">Company</th>-->
+                        <!--                                            <th scope="col">approved user</th>-->
+                        <!--                                        </tr>-->
+                        <!--                                    </thead>-->
+                        <!--                                    <tbody>-->
+                        <!--                                        <t t-foreach='purchase_receipts' t-as='PR'>-->
+                        <!--                                            <tr>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="PR.create_uid.name"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="PR.number"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="PR.amount - PR.tax_amount"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="PR.date"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="PR.company_id.name"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                                <td>-->
+                        <!--                                                    <span t-esc="PR.write_uid.name"></span>-->
+                        <!--                                                </td>-->
+                        <!--                                            </tr>-->
+                        <!--                                        </t>-->
+                        <!--                                    </tbody>-->
+                        <!--                                </table>-->
+                        <!--                            </t>-->
+                        <!--                        </t>-->
+                        <t t-if="len(payments) != 0">
+                            <h1>Payments</h1>
+                            <table class="table table-bordered mb64">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Payment Number</th>
+                                        <!--                                        <th scope="col">Reference</th>-->
+                                        <th scope="col">Value</th>
+                                        <th scope="col">Currency</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">approved user</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach='payments' t-as='P'>
+                                        <tr>
+                                            <td>
+                                                <span t-esc="P.create_uid.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="P.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="P.amount"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="P.currency_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="P.date"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="P.company_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="P.write_uid.name"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <t t-if="len(COA) != 0">
+                            <h1>Chart Of Account</h1>
+                            <table class="table table-bordered mb64">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">approved user</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach='COA' t-as='coa'>
+                                        <tr>
+                                            <td>
+                                                <span t-esc="coa.create_uid.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="coa.code"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="coa.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="coa.account_type"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="coa.create_date"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="coa.company_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="coa.write_uid.name"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <t t-if="len(partners) != 0">
+                            <h1>Partners</h1>
+                            <table class="table table-bordered mb64">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Customer/Vendor</th>
+                                        <th scope="col">Country</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">approved user</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach='partners' t-as='par'>
+                                        <tr>
+                                            <td>
+                                                <span t-esc="par.create_uid.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="par.name"></span>
+                                            </td>
+                                            <td>
+                                                <!--                                                <t t-if="par.customer">-->
+                                                <!--                                                    <span>Customer/</span>-->
+                                                <!--                                                </t>-->
+                                                <!--                                                <t t-if="par.supplier">-->
+                                                <!--                                                    <span>Vendor</span>-->
+                                                <!--                                                </t>-->
+                                                <span>Customer/Vendor</span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="par.country_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="par.create_date"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="par.company_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="par.write_uid.name"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <t t-if="len(products) != 0">
+                            <h1>Products</h1>
+                            <table class="table table-bordered mb64">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">UOM</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">approved user</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach='products' t-as='pro'>
+                                        <tr>
+                                            <td>
+                                                <span t-esc="pro.create_uid.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pro.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pro.type"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pro.uom_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pro.create_date"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pro.company_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pro.write_uid.name"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <t t-if="len(categories) != 0">
+                            <h1>Product Categories</h1>
+                            <table class="table table-bordered mb64">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Parent Category</th>
+                                        <th scope="col">Costing Method</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">approved user</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach='categories' t-as='CAT'>
+                                        <tr>
+                                            <td>
+                                                <span t-esc="CAT.create_uid.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="CAT.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="CAT.parent_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="CAT.property_cost_method"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="CAT.create_date"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="CAT.company_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="CAT.write_uid.name"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <t t-if="len(MRP) != 0">
+                            <h1>MRP Production</h1>
+                            <table class="table table-bordered mb64">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">approved user</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach='MRP' t-as='mrp'>
+                                        <tr>
+                                            <td>
+                                                <span t-esc="mrp.create_uid.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="mrp.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="mrp.product_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="mrp.product_qty"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="mrp.create_date"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="mrp.company_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="mrp.write_uid.name"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <t t-if="len(stock_picking) != 0">
+                            <h1>Stock Picking</h1>
+                            <table class="table table-bordered mb64">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Source</th>
+                                        <th scope="col">Destination</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">approved user</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach='stock_picking' t-as='pick'>
+                                        <tr>
+                                            <td>
+                                                <span t-esc="pick.create_uid.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pick.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pick.picking_type_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pick.location_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pick.location_dest_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pick.create_date"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pick.company_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="pick.write_uid.name"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <!--                        <t t-if="len(stock_inventory) != 0">-->
+                        <!--                            <h1>Inventory Adjustment</h1>-->
+                        <!--                            <table class="table table-bordered">-->
+                        <!--                                <thead>-->
+                        <!--                                    <tr>-->
+                        <!--                                        <th scope="col">User</th>-->
+                        <!--                                        <th scope="col">Name</th>-->
+                        <!--                                        <th scope="col">Location</th>-->
+                        <!--                                        <th scope="col">Filter</th>-->
+                        <!--                                        <th scope="col">Date</th>-->
+                        <!--                                        <th scope="col">Company</th>-->
+                        <!--                                        <th scope="col">approved user</th>-->
+                        <!--                                    </tr>-->
+                        <!--                                </thead>-->
+                        <!--                                <tbody>-->
+                        <!--                                    <t t-foreach='stock_inventory' t-as='Adjust'>-->
+                        <!--                                        <tr>-->
+                        <!--                                            <td>-->
+                        <!--                                                <span t-esc="Adjust.create_uid.name"></span>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td>-->
+                        <!--                                                <span t-esc="Adjust.name"></span>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td>-->
+                        <!--                                                <span t-esc="Adjust.location_id.name"></span>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td>-->
+                        <!--                                                <t t-if="Adjust.filter == 'none'">-->
+                        <!--                                                    <span>All Products</span>-->
+                        <!--                                                </t>-->
+                        <!--                                                <t t-if="Adjust.filter == 'category'">-->
+                        <!--                                                    <span>One Product Category</span>-->
+                        <!--                                                </t>-->
+                        <!--                                                <t t-if="Adjust.filter == 'product'">-->
+                        <!--                                                    <span>One Product Only</span>-->
+                        <!--                                                </t>-->
+                        <!--                                                <t t-if="Adjust.filter == 'product'">-->
+                        <!--                                                    <span>Select Products Manually</span>-->
+                        <!--                                                </t>-->
+                        <!--                                                <t t-if="Adjust.filter == 'pack'">-->
+                        <!--                                                    <span>A Pack</span>-->
+                        <!--                                                </t>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td>-->
+                        <!--                                                <span t-esc="Adjust.date"></span>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td>-->
+                        <!--                                                <span t-esc="Adjust.company_id.name"></span>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td>-->
+                        <!--                                                <span t-esc="Adjust.write_uid.name"></span>-->
+                        <!--                                            </td>-->
+                        <!--                                        </tr>-->
+                        <!--                                    </t>-->
+                        <!--                                </tbody>-->
+                        <!--                            </table>-->
+                        <!--                        </t>-->
+                        <t t-if="len(stock_warehouse) != 0">
+                            <h1>Stock Warehouse</h1>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Shortcut</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">approved user</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach='stock_warehouse' t-as='WH'>
+                                        <tr>
+                                            <td>
+                                                <span t-esc="WH.create_uid.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="WH.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="WH.code"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="WH.create_date"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="WH.company_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="WH.write_uid.name"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Form View -->
+    <record id="report_log_view_form" model="ir.ui.view">
+        <field name="name">report.log.view.form</field>
+        <field name="model">report.log</field>
+        <field name="arch" type="xml">
+            <form editable="top" create="0" edit="0">
+                <header>
+                    <button name="action_view_record" type="object"
+                            attrs="{'invisible': ['|' ,('res_model', '=', False), ('res_ids', '=', False)]}"
+                            string="View Record(s)"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="user_id"/>
+                            <field name="report_id"/>
+                            <field name="res_model"/>
+                            <field name="res_ids"/>
+                        </group>
+                        <group>
+                            <field name="report_content" filename="report_file_name" widget="file"/>
+                            <field name="report_file_name" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="error" string="Error Message" attrs="{'invisible': [('state', '!=', 'fail')]}">
+                            <field name="fail_message"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="report_log_view_tree" model="ir.ui.view">
+        <field name="name">report.log.view.tree</field>
+        <field name="model">report.log</field>
+        <field name="arch" type="xml">
+            <tree editable="top" create="0" edit="0">
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="report_id"/>
+                <field name="res_model"/>
+                <field name="res_ids"/>
+                <field name="state"/>
+                <button name="action_view_record" type="object"
+                        attrs="{'invisible': ['|' ,('res_model', '=', False), ('res_ids', '=', False)]}"
+                        string="View Record(s)"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="report_log_view_search" model="ir.ui.view">
+        <field name="name">report.log.view.search</field>
+        <field name="model">report.log</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="user_id"/>
+                <field name="report_id"/>
+                <field name="res_model"/>
+                <filter string="Failed" domain="[('state', '=', 'fail')]" name="failed"/>
+                <group expand="0" string="Group By">
+                    <filter string="Report" name="report" domain="[]" context="{'group_by': 'report_id'}"/>
+                    <filter name="user" string="User" domain="[]" context="{'group_by': 'user_id'}"/>
+                    <filter string="Date" name="date" domain="[]" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="report_log_action" model="ir.actions.act_window">
+        <field name="name">Reports Log</field>
+        <field name="res_model">report.log</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_report_log"
+            name="Report Log"
+            action="report_log_action"
+    />
+    <menuitem
+            id="cusstom_reports_menuitem"
+            name="System Reports"
+            action="base.reports_action"
+            sequence="11"
+    />
+
+
+</odoo>

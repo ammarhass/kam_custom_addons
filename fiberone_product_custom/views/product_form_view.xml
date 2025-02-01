@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+        <record id="view_product_template_form_inherit" model="ir.ui.view">
+            <field name="name">product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='standard_price_uom']" position="after">
+                    <field name="additional_cost_currency_id"/>
+                    <field name="additional_cost"/>
+                </xpath>
+                <field name="default_code" position="after">
+                    <field name="default_sequence" readonly="1" string="Sequence"/>
+                    <field name="eg_code" string="EG Code"/>
+                    <field name="number_part" string="Part Number"/>
+                    <field name="manufactured_company" string="Manufacturing Company"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_product_template_tree_inherit" model="ir.ui.view">
+            <field name="name">product.template.tree.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="default_code" position="before">
+                    <field name="default_sequence" string="Sequence"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_product_product_form_inherit" model="ir.ui.view">
+            <field name="name">product.product.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='standard_price_uom']" position="after">
+                    <field name="additional_cost_currency_id"/>
+                    <field name="additional_cost"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="inherit_product_product_stock_tree_inherit_stock_account">
+            <field name="name">inherit.product.product.stock.tree.inherit.stock.account</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock_account.product_product_stock_tree_inherit_stock_account"/>
+            <field name="arch" type="xml">
+                <field name="avg_cost" position="before">
+                    <field name="additional_cost_currency_id" invisible="1"/>
+                    <field name="additional_cost" string="Foreign Unit Cost" optional="show" widget='monetary' options="{'currency_field': 'additional_cost_currency_id'}"/>
+                    <field name="total_additional_cost" string="Foreign Total Value" optional="show" widget='monetary' options="{'currency_field': 'additional_cost_currency_id'}" sum="Foreign Total Value"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

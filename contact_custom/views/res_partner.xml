@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+
+        <record id="inherit_res_partner_form_view" model="ir.ui.view">
+            <field name="name">inherit.res.partner.form.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="is_contact" attrs="{'readonly':['|', ('is_customer', '=', True), ('is_vendor', '=', True)]}"/>
+                    <field name="is_customer" attrs="{'readonly':['|', ('is_contact', '=', True), ('is_employee', '=', True)]}"/>
+                    <field name="is_vendor" attrs="{'readonly':['|', ('is_contact', '=', True), ('is_employee', '=', True)]}"/>
+                    <field name="is_employee" attrs="{'readonly':['|', ('is_customer', '=', True), ('is_vendor', '=', True)]}"/>
+                </xpath>
+
+<!--                <xpath expr="//page[@name='sales_purchases']//field[@name='company_id']" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': 1}</attribute>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+    </data>
+</odoo>

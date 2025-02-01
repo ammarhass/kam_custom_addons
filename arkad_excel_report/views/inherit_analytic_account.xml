@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+
+        <record id="inherit_analytic_account_tree" model="ir.ui.view">
+            <field name="name">inherit.analytic.account.tree</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_list"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <header>
+                        <button name="create_analytic_report" type="object" string="Print Excel Report"
+                                class="btn-primary" groups="arkad_excel_report.arkad_normal_group"/>
+                        <button name="create_analytic_report_vendor" type="object" string="Print  Vendor Excel Report"
+                                class="btn-primary" groups="arkad_excel_report.arkad_normal_group"/>
+
+                    </header>
+
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

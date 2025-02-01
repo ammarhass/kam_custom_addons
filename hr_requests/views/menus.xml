@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_hr_request_root" name="HR Requests"
+                  action="hr_request_action"/>
+
+        <menuitem id="menu_hr_request"
+                  parent="menu_hr_request_root"
+                  name="HR Requests"
+                  sequence="1"/>
+
+        <menuitem id="menu_hr_submenu_request"
+                  parent="menu_hr_request"
+                  name="Hr Request"
+                  action="hr_request_waiting_hr_action"
+                  sequence="1"/>
+        <menuitem id="menu_hr_submenu_request_approval"
+                  parent="menu_hr_request"
+                  name="HR Request Approved"
+                  action="hr_request_approved_hr_action"/>
+
+
+    </data>
+</odoo>

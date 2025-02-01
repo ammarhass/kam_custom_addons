@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="inherit_view_employee_form_view" model="ir.ui.view">
+            <field name="name">inherit.view.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='hr_settings']" position="after">
+                    <page name="onboarding_plan" string="Onboarding Plan">
+                        <field name="onboarding_ids" widget="one2many_list" mode="tree">
+                            <tree editable="bottom" decoration-success="hr_approval == True" >
+                                <field name="name" required="1"/>
+                                <field name="summary"/>
+                                <field name="hr_approval"/>
+                                <field name="employee_assign"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

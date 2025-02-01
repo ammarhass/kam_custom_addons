@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="inherit_view_employee_form_view_2" model="ir.ui.view">
+            <field name="name">inherit.view.employee.form.2</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <field name="custody_eligible" invisible="1"/>
+                    <page string="Custody Request Approvals" name="custody_request_approvals" attrs="{'invisible': [('custody_eligible','=',False)]}">
+                        <group>
+                            <group string="Level 1 Approval">
+                                <field name="first_approval"/>
+                                <label for="first_amount_from" string="Amount"/>
+                                <div class="o_row">
+                                    <span class="text-muted">From</span>
+                                    <field name="first_amount_from"/>
+                                    <span class="text-muted">To</span>
+                                    <field name="first_amount_to"/>
+                                </div>
+                            </group>
+                            <group string="Level 2 Approval">
+                                <field name="second_approval"/>
+                                <label for="second_amount_from" string="Amount"/>
+                                <div class="o_row">
+                                    <span class="text-muted">From</span>
+                                    <field name="second_amount_from"/>
+                                    <span class="text-muted">To</span>
+                                    <field name="second_amount_to"/>
+                                </div>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
