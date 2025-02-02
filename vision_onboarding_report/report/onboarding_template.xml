@@ -39,7 +39,7 @@
                                             <th>Completed</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="sale_tbody">
+                                    <tbody>
                                         <t t-set="current_subtotal" t-value="0"/>
                                         <t t-set="lines" t-value="o.onboarding_ids"/>
                                         <t t-set="a" t-value="1"/>
