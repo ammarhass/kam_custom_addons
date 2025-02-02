@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="connector_view_move_form_inherit3" model="ir.ui.view">
+        <field name="name">connector.account.move.form.inherit3</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='aml_tab']//field[@name='line_ids']//tree//field[@name='partner_id']" position="attributes">
+
+                <attribute name="domain">[('customer_rank', '>', 0)]</attribute>
+
+
+
+            </xpath>
+<!--            <xpath expr="//group[@id='header_left_group']//field[@name='partner_id']" position="replace">-->
+
+
+
+<!--                &lt;!&ndash; Vendor Partner Field &ndash;&gt;-->
+<!--                <field name="partner_id" string="Vendor"-->
+<!--                       domain="[('supplier_rank', '>', 0)]"-->
+<!--                       attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}"-->
+<!--                       readonly="0" nolabel="1"/>-->
+<!--                &lt;!&ndash; Customer Partner Field &ndash;&gt;-->
+<!--                 <field name="partner_id" string="Customer"-->
+<!--                       domain="[('customer_rank', '>', 0)]"-->
+<!--                       attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"-->
+<!--                       readonly="0" nolabel="1"/>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+     <record model="ir.ui.menu" id="account.menu_action_move_out_refund_type">
+        <field name='name'>Returned</field>
+
+    </record>
+</odoo>

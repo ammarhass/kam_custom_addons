@@ -186,33 +186,37 @@ class ConnectorDashboard(models.Model):
 
     def _compute_record_count(self):
         for single_record in self:
-            instanceId = self.instance_id.id
-            name = self[0].item_name
+            instanceId = single_record.instance_id.id
+            name = single_record.item_name
             needOne = fieldName[name][0]
             needTwo = fieldName[name][1]
             model = modelName[name][1]
             mappedModel = modelName[name][2]
             mappedfieldName = modelName[name][3]
             action = modelName[name][0]
+
             if action == 1:
                 totalOne = self._get_need_sync_record(mappedModel, instanceId)
                 totalTwo = self._get_no_sync_record(
                     model, mappedModel, mappedfieldName, instanceId)
-                self[0][needOne] = totalOne
-                self[0][needTwo] = totalTwo
+                single_record[needOne] = totalOne
+                single_record[needTwo] = totalTwo
             elif action == 2:
-                totalInvc, totalNeedInv, totalDlvr, totlaNeedDlvr = self._get_processed_unprocessed_records(
+                totalInvc, totalNeedInv, totalDlvr, totalNeedDlvr = self._get_processed_unprocessed_records(
                     instanceId)
-                self[0][needOne] = len(totalNeedInv)
-                self[0][needTwo] = len(totlaNeedDlvr)
-                self[0].count_invoiced_records = len(totalInvc)
-                self[0].count_delivered_records = len(totalDlvr)
+                single_record[needOne] = len(totalNeedInv)
+                single_record[needTwo] = len(totalNeedDlvr)
+                single_record.count_invoiced_records = len(totalInvc)
+                single_record.count_delivered_records = len(totalDlvr)
             elif mappedfieldName:
-                self[0][needTwo] = self._get_no_sync_record(
+                single_record[needTwo] = self._get_no_sync_record(
                     model, mappedModel, mappedfieldName, instanceId)
-            
-            self[0].count_mapped_records = self._get_mapped_records(
-                mappedModel, instanceId)
+
+            # Use write to set the count_mapped_records field
+            single_record.write({
+                'count_mapped_records': self._get_mapped_records(
+                    mappedModel, instanceId)
+            })
 
     @api.model
     def _get_mapped_records(self, mappedModel, instanceId):

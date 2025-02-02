@@ -1,0 +1,266 @@
+<odoo>
+    <template id="invoice__journal_entry_report_inherit" inherit_id="accounting_pdf_reports.report_journal_entries">
+        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o"/>
+
+                <t t-if="o.company_id.is_gadara">
+                    <div class="header" name="customer_invoice ">
+                        <div class="row mt128" style="padding-top: 150px; padding-bottom: 120px;">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <img t-att-src="'/accounting_enhancement/static/src/img/header.png'"
+                                             style="max-height: 150px;max-width:100%;" alt="Logo"/>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="row mt128" style="padding-bottom: 150px; margin-bottom: 150px;">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <img t-att-src="'/accounting_enhancement/static/src/img/foter.png'"
+                                             style="max-height: 150px;max-width:100%;" alt="Logo"/>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--                <t t-set="o" t-value="o.with_context(lang=lang)"/>-->
+                    <div class="mt-5">
+
+                        <div class="page">
+                            <!-- Container for the image and overlay text -->
+                            <div style="position: relative; text-align: center; width: 100%;">
+                                <!-- Logo Image -->
+                                <img src="/accounting_enhancement/static/src/img/content.png"
+                                     alt="Logo"
+                                     style="width: 100%; height: auto; object-fit: cover;"/>
+                                <!-- Overlay Text -->
+                                <div style="position: absolute; top: 20%; width: 95%; left: 5%; right: 5%; text-align: center; transform: translate(-50%, -50%); color: black; font-size: 17px; font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);">
+                                    <div>
+                                        <h3>
+                                            <span t-field="o.name"/>
+                                        </h3>
+                                    </div>
+                                    <br></br>
+                                    <div class="row">
+                                        <table width="100%" class="table-bordered">
+
+                                            <tr>
+                                                <td>Journal:
+                                                    <span t-field="o.journal_id.name"/>
+                                                </td>
+                                                <td>
+                                                    Date:
+                                                    <span t-field="o.date" t-options="{'widget': 'date'}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Partner:
+                                                    <span t-field="o.partner_id.display_name"/>
+                                                </td>
+                                                <td>
+                                                    Reference:
+                                                    <span t-field="o.ref"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <br></br>
+                                        <table width="100%" class="table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Account</th>
+                                                    <th>Date</th>
+                                                    <th>Partner</th>
+                                                    <th>Label</th>
+                                                    <th>Analytic Account</th>
+                                                    <th>Debit</th>
+                                                    <th>Credit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="total_credit" t-value="0"/>
+                                                <t t-set="total_debit" t-value="0"/>
+                                                <t t-foreach="o.line_ids" t-as="line">
+                                                    <tr>
+                                                        <td>
+                                                            <span t-field="line.account_id.name"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="line.date" t-options="{'widget': 'date'}"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="line.partner_id.display_name"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="line.name"/>
+                                                        </td>
+                                                        <td>
+                                                            <span>
+                                                                <div t-foreach="line.analytic_distribution"
+                                                                     t-as="distribution">
+                                                                    <t t-esc="line.env['account.analytic.account'].browse(int(distribution))[0].name"/>
+                                                                    :
+                                                                    <t t-esc="line.analytic_distribution.get(distribution)"/>
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <span t-field="line.debit"
+                                                                  t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"/>
+
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <span t-field="line.credit"
+                                                                  t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"/>
+                                                        </td>
+                                                        <t t-set="total_credit" t-value="total_credit + line.credit"/>
+                                                        <t t-set="total_debit" t-value="total_debit + line.debit"/>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                            <tfooter>
+                                                <tr>
+                                                    <td colspan="5"></td>
+                                                    <td class="text-end">
+                                                        <span t-esc="total_debit"
+                                                              t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <span t-esc="total_credit"
+                                                              t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                                    </td>
+                                                </tr>
+                                            </tfooter>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+
+            <t t-else="">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page" style="font-size:15px;">
+                            <div>
+                                <h3>
+                                    <span t-field="o.name"/>
+                                </h3>
+                            </div>
+                            <br></br>
+                            <div class="row">
+                                <table width="100%" class="table-bordered">
+
+                                    <tr>
+                                        <td>Journal:
+                                            <span t-field="o.journal_id.name"/>
+                                        </td>
+                                        <td>
+                                            Date:
+                                            <span t-field="o.date" t-options="{'widget': 'date'}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Partner:
+                                            <span t-field="o.partner_id.display_name"/>
+                                        </td>
+                                        <td>
+                                            Reference:
+                                            <span t-field="o.ref"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <br></br>
+                                <table width="100%" class="table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Account</th>
+                                            <th>Date</th>
+                                            <th>Partner</th>
+                                            <th>Label</th>
+                                            <th>Analytic Account</th>
+                                            <th>Debit</th>
+                                            <th>Credit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="total_credit" t-value="0"/>
+                                        <t t-set="total_debit" t-value="0"/>
+                                        <t t-foreach="o.line_ids" t-as="line">
+                                            <tr>
+                                                <td>
+                                                    <span t-field="line.account_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="line.date" t-options="{'widget': 'date'}"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="line.partner_id.display_name"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="line.name"/>
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        <div t-foreach="line.analytic_distribution" t-as="distribution">
+                                                            <t t-esc="line.env['account.analytic.account'].browse(int(distribution))[0].name"/>
+                                                            :
+                                                            <t t-esc="line.analytic_distribution.get(distribution)"/>
+                                                        </div>
+                                                    </span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span t-field="line.debit"
+                                                          t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"/>
+
+                                                </td>
+                                                <td class="text-end">
+                                                    <span t-field="line.credit"
+                                                          t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"/>
+                                                </td>
+                                                <t t-set="total_credit" t-value="total_credit + line.credit"/>
+                                                <t t-set="total_debit" t-value="total_debit + line.debit"/>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                    <tfooter>
+                                        <tr>
+                                            <td colspan="5"></td>
+                                            <td class="text-end">
+                                                <span t-esc="total_debit"
+                                                      t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                            </td>
+                                            <td class="text-end">
+                                                <span t-esc="total_credit"
+                                                      t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                            </td>
+                                        </tr>
+                                    </tfooter>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>
