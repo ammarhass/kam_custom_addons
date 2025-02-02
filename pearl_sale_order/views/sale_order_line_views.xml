@@ -8,6 +8,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='order_lines']//field[@name='order_line']//tree//field[@name='name']"
                        position="after">
+                    <field name="quantity_available" string="Ava.Qty"/>
+                    <field name="image" string="Image" optional="hide"/>
                     <field name="brand_id" string="Brand"/>
                     <field name="product_categ_id" optional="hide"/>
                     <field name="product_tag_ids" widget="many2many_tags" optional="hide"/>
@@ -20,13 +22,19 @@
 
                 <xpath expr="//page[@name='order_lines']//field[@name='order_line']//tree//field[@name='price_unit']"
                        position="attributes">
-                    <attribute name="attrs">{'readonly': ['|', ('can_edit_price', '!=', True), ('qty_invoiced', '&gt;', 0)]}</attribute>
+                    <attribute name="attrs">{'readonly': ['|', ('can_edit_price', '!=', True), ('qty_invoiced', '&gt;',
+                        0)]}
+                    </attribute>
                 </xpath>
 
                 <xpath expr="//page[@name='order_lines']//field[@name='order_line']//tree//field[@name='discount']"
                        position="attributes">
                     <attribute name="groups">pearl_sale_order.sale_order_discount_access</attribute>
                 </xpath>
+                <xpath expr="//group[@name='partner_details']//field[@name='partner_shipping_id']" position="after">
+                    <field name="customer_address" string="Address"/>
+                </xpath>
+
             </field>
 
         </record>

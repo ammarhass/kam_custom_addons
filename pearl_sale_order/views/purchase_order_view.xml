@@ -8,9 +8,16 @@
 
                 <xpath expr="//page[@name='products']//field[@name='order_line']//tree//field[@name='name']"
                        position="after">
+                    <field name="quantity_available" string="Quantity"/>
+                    <field name="image" string="Image" optional="hide"/>
                     <field name="brand_id" string="Brand"/>
                     <field name="product_categ_id" optional="hide"/>
                     <field name="product_tag_ids" widget="many2many_tags" optional="hide"/>
+                </xpath>
+
+                <xpath expr="//page[@name='products']//field[@name='order_line']//tree//field[@name='name']"
+                       position="attributes">
+                    <attribute name="optional">show</attribute>
                 </xpath>
 
             </field>

@@ -1,3 +1,5 @@
+from pydoc import browse
+
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
@@ -13,6 +15,22 @@ class SaleOrderLine(models.Model):
         compute='_compute_can_edit_price',
         store=False
     )
+    image = fields.Image(compute='_compute_ava_quantity')
+    quantity_available = fields.Float(compute='_compute_ava_quantity')
+
+
+    @api.depends('product_id')
+    def _compute_ava_quantity(self):
+        for rec in self:
+            if rec.product_id:
+                product = rec.sudo().env['product.product'].browse(rec.product_id.id)
+                ava_qty = product.sudo().qty_available
+                image = product.sudo().image_1920
+                rec.quantity_available = ava_qty
+                rec.image = image
+            else:
+                rec.quantity_available = 0.0
+                rec.image = False
 
     @api.depends('product_id')
     def _compute_can_edit_price(self):
@@ -35,13 +53,15 @@ class SaleOrderLine(models.Model):
                 if rec.product_uom_qty > rec.product_id.qty_available:
                     raise ValidationError(_('The available Quantity of product ({}) is {}'.format(rec.product_id.name, rec.product_id.qty_available)))
 
+    @api.constrains('price_total')
+    def _constrain_price_total(self):
+        self = self.sudo()
+        for rec in self:
+            if rec.price_total:
+                if rec.product_id:
+                    if rec.price_total < rec.product_id.standard_price * rec.product_uom_qty:
+                        raise ValidationError(
+                            _('The Unit price of the product[{}] (include discount) must be greater than the cost price'.format(rec.product_id.name)))
 
-    def prepare_invoice_line(self, invoice):
-        invoice_line_vals = super(SaleOrderLine, self).prepare_invoice_line(invoice)
 
-        # Add custom fields to invoice_line_vals
-        invoice_line_vals.update({
-            'brand_id': self.brand_id.id,
-        })
 
-        return invoice_line_vals

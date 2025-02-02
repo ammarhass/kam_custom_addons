@@ -16,6 +16,8 @@ class SaleOrder(models.Model):
         ('third', 'Third Approval')
     ])
 
+    customer_address = fields.Text()
+
     # @api.constrains('order_line')
     # def _constrain_product_quantity(self):
     #     for rec in self:
