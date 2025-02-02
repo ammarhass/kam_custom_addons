@@ -51,6 +51,19 @@ class HrRequest(models.Model):
         string='State', copy=False, default='draft', tracking=True,
         help="Status of the hr request")
 
+    directed_to = fields.Char()
+    full_name = fields.Char()
+    national_id = fields.Char()
+    title = fields.Char()
+    starting_date = fields.Date()
+    salary = fields.Monetary()
+    Social_insurance_number = fields.Char()
+    travel_date_from = fields.Date()
+    travel_date_to = fields.Date()
+    currency_id = fields.Many2one(
+        'res.currency', string='Currency', required=True,
+        default=lambda self: self.env.user.company_id.currency_id.id)
+
 
     @api.depends('request_type', 'employee_id')
     def _compute_name(self):

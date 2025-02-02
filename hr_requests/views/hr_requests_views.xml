@@ -68,8 +68,34 @@
                                 <field name="company_id"/>
                             </group>
                             <notebook>
-                                <page string="HR Letter Info"
+                                <page string="HR Request Info"
                                       attrs="{'invisible':[('request_type','!=', 'hr_letter')]}">
+                                    <group>
+                                        <group>
+                                            <field name="directed_to"/>
+                                            <field name="full_name"/>
+                                            <field name="national_id"/>
+                                            <field name="title"/>
+                                        </group>
+                                        <group>
+                                            <field name="starting_date"/>
+                                            <field name="salary"/>
+                                            <field name="Social_insurance_number"/>
+                                            <label for="travel_date_from"
+                                                   string="Travel Dates"/>
+                                            <div class="o_row">
+                                                <span class="text-muted">From</span>
+                                                <field name="travel_date_from" class="oe_inline"
+                                                       widget="daterange"
+                                                       options="{'related_end_date': 'travel_date_to'}"/>
+                                                <span class="text-muted">To</span>
+                                                <field name="travel_date_to" class="oe_inline"
+                                                       widget="daterange"
+                                                       options="{'related_end_date': 'travel_date_from'}"/>
+                                            </div>
+
+                                        </group>
+                                    </group>
 
                                 </page>
                                 <page string="Embassy Letter Info"
