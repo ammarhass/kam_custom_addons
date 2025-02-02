@@ -32,7 +32,7 @@ var BHMyAttendances = AbstractAction.extend({
             });
 
         var def_location = this._rpc({
-                model: 'hr.attendance.location',
+                model: 'hr.attendance.location.vision',
                 method: 'search_read',
                 args: [[], ['id', 'code', 'name','loc_class_name'],,,'sequence ASC'],
                 context: session.user_context,

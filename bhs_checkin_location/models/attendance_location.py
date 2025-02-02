@@ -2,7 +2,7 @@ from odoo import models, fields, tools, api
 
 
 class HrAttendanceLocation(models.Model):
-    _name = 'hr.attendance.location'
+    _name = 'hr.attendance.location.vision'
 
     sequence = fields.Integer("Sequence")
     code = fields.Char('Code', required=True)
