@@ -1,6 +1,6 @@
 <odoo>
     <record id="stock.action_report_picking" model="ir.actions.report">
-        <field name="paperformat_id" ref="accounting_enhancement._custom_paper_format"/>
+        <field name="paperformat_id" ref="accounting_enhancement.paperformat_sale_order_quotations_report"/>
 
     </record>
     <template id="report_report_picking_document_inherit" inherit_id="stock.report_picking">

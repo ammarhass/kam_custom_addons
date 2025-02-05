@@ -1,10 +1,25 @@
 <odoo>
+    <record id="paperformat_sale_order_quotations_report" model="report.paperformat">
+        <field name="name">Toutoungi print</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">400</field>
+        <field name="page_width">250</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">30</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">20</field>
+        <field name="dpi">90</field>
+    </record>
     <record id="purchase.action_report_purchase_order" model="ir.actions.report">
-        <field name="paperformat_id" ref="accounting_enhancement._custom_paper_format"/>
+        <field name="paperformat_id" ref="accounting_enhancement.paperformat_sale_order_quotations_report"/>
 
     </record>
     <record id="purchase.report_purchase_quotation" model="ir.actions.report">
-        <field name="paperformat_id" ref="accounting_enhancement._custom_paper_format"/>
+        <field name="paperformat_id" ref="accounting_enhancement.paperformat_sale_order_quotations_report"/>
         <field name="binding_model_id" eval="False"/>
 
     </record>
@@ -402,33 +417,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <t t-if="o.discount_type == 'global'">
-                                    <div class="row">
-                                        <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'}">
-                                            <table class="table table-sm">
-                                                <tr class="border-black">
-                                                    <td>
-                                                        <strong>Discount Method</strong>
-                                                    </td>
-                                                    <td class="text-right">
-                                                        <span t-field="o.discount_method"/>
-                                                    </td>
-                                                </tr>
-                                                <tr class="border-black">
-                                                    <td>
-                                                        <strong>Discount Amount</strong>
-                                                    </td>
-                                                    <td class="text-right">
-                                                        <span t-field="o.discount_amount"/>
-                                                        <t t-if="o.discount_method == 'per'">
-                                                            <span class="oe_inline">&amp;nbsp;%</span>
-                                                        </t>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </t>
 
                                 <p t-field="o.notes" class="mt-4"/>
                                 <div class="oe_structure"/>

@@ -1,7 +1,6 @@
 <odoo>
     <record id="sale.action_report_saleorder" model="ir.actions.report">
-        <field name="paperformat_id" ref="accounting_enhancement._custom_paper_format"/>
-
+<field name="paperformat_id" ref="accounting_enhancement.paperformat_sale_order_quotations_report"/>
     </record>
     <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
         <xpath expr="//t[@t-call='web.external_layout']" position="replace">
@@ -74,7 +73,7 @@
                              alt="Logo"
                              style="width: 100%; height: auto; object-fit: cover;"/>
                         <!-- Overlay Text -->
-                        <div style="position: absolute; top: 13%; left: 5%; transform: translate(-50%, -50%); color: black; font-size: 17px; font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);">
+                        <div style="position: absolute; top: 18%; left: 5%; transform: translate(-50%, -50%); color: black; font-size: 17px; font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);">
 
 
                             <div class="page">
@@ -322,33 +321,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <t t-if="doc.discount_type == 'global'">
-                                    <div class="row">
-                                        <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'}">
-                                            <table class="table table-sm">
-                                                <tr class="border-black">
-                                                    <td>
-                                                        <strong>Discount Method</strong>
-                                                    </td>
-                                                    <td class="text-right">
-                                                        <span t-field="doc.discount_method"/>
-                                                    </td>
-                                                </tr>
-                                                <tr class="border-black">
-                                                    <td>
-                                                        <strong>Discount Amount</strong>
-                                                    </td>
-                                                    <td class="text-right">
-                                                        <span t-field="doc.discount_amount"/>
-                                                        <t t-if="doc.discount_method == 'per'">
-                                                            <span class="oe_inline">&amp;nbsp;%</span>
-                                                        </t>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </t>
+
 
 
                                 <div t-if="doc.signature" class="mt-4 ml64 mr4" name="signature">

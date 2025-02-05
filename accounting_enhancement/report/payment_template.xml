@@ -1,6 +1,6 @@
 <odoo>
     <record id="account.action_report_payment_receipt" model="ir.actions.report">
-        <field name="paperformat_id" ref="accounting_enhancement._custom_paper_format"/>
+        <field name="paperformat_id" ref="accounting_enhancement.paperformat_sale_order_quotations_report"/>
 
     </record>
     <template id="report_payment_receipt_document_inherit" inherit_id="account.report_payment_receipt_document">

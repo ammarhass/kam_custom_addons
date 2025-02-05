@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="model_product_template_server" model="ir.actions.server">
+            <field name="name">remove space</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_product_template"/>
+            <field name="binding_model_id" ref="accounting_enhancement.model_product_template"/>
+            <field name="state">code</field>
+            <field name="code">records.remove_spaces()</field>
+        </record>
+
+
+    </data>
+</odoo>
