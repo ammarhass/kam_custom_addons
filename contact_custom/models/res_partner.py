@@ -25,17 +25,16 @@ class ImportResPartner(models.Model):
         res = super().write(vals)
         print('hello')
         return res
-
+    
     @api.ondelete(at_uninstall=False)
     def _unlink_except_active_pos_session(self):
-        running_sessions = self.env['pos.session'].sudo().search([('state', '!=', 'closed'), ('company_id', '=', self.env.company.id)])
-        if running_sessions:
-            raise UserError(
-                _("You cannot delete contacts while there are active PoS sessions. Close the session(s) %s first.")
-                % ", ".join(session.name for session in running_sessions)
-            )
-
-
+        if self.env.get('pos.session'):
+            running_sessions = self.env['pos.session'].sudo().search([('state', '!=', 'closed'), ('company_id', '=', self.env.company.id)])
+            if running_sessions:
+                raise UserError(
+                    _("You cannot delete contacts while there are active PoS sessions. Close the session(s) %s first.")
+                    % ", ".join(session.name for session in running_sessions)
+                )
 
 
 class AccountMove(models.Model):
