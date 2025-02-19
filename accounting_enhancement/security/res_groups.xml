@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+        <record id="newjadara_groups_category" model="ir.module.category">
+            <field name="name">New Jadara Group</field>
+        </record>
+
+        <record id="newjadara_normal_group" model="res.groups">
+            <field name="name">New Jadara User</field>
+            <field name="category_id" ref="newjadara_groups_category"/>
+        </record>
+
+    </data>
+</odoo>

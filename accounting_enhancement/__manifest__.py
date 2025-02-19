@@ -15,6 +15,7 @@
     'data': [
 
         # 'security/ir.model.access.csv',
+        'security/res_groups.xml',
         'data/server_action.xml',
         'report/purchase_template.xml',
         'views/company_view.xml',
