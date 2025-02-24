@@ -17,6 +17,8 @@
     'assets': {
         'point_of_sale.assets': [
             'sha_pos_orders_access/static/src/xml/TicketButton.xml',
+            'sha_pos_orders_access/static/src/xml/RefundButton.xml',
+            'sha_pos_orders_access/static/src/xml/PaymentScreen.xml',
         ]
     }
 }

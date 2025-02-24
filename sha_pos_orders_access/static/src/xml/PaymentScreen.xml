@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template">
+
+    <t t-name="paymentScreencustom" t-inherit="point_of_sale.PaymentScreen" t-inherit-mode="extension" owl="1">
+
+        <xpath expr="//div[hasclass('payment-controls')]//div[@t-on-click='toggleIsToInvoice']" position="attributes">
+            <attribute name="t-if">env.pos.user and env.pos.user.role == 'manager'</attribute>
+        </xpath>
+
+    </t>
+
+</templates>
