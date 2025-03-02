@@ -9,7 +9,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//notebook" position="inside">
                     <field name="custody_eligible" invisible="1"/>
-                    <page string="Custody Request Approvals" name="custody_request_approvals" attrs="{'invisible': [('custody_eligible','=',False)]}">
+                    <page string="Custody Request Approvals" name="custody_request_approvals"
+                          attrs="{'invisible': [('custody_eligible','=',False)]}">
                         <group>
                             <group string="Level 1 Approval">
                                 <field name="first_approval"/>
@@ -29,6 +30,26 @@
                                     <field name="second_amount_from"/>
                                     <span class="text-muted">To</span>
                                     <field name="second_amount_to"/>
+                                </div>
+                            </group>
+                            <group string="Level 3 Approval">
+                                <field name="third_approval"/>
+                                <label for="third_amount_from" string="Amount"/>
+                                <div class="o_row">
+                                    <span class="text-muted">From</span>
+                                    <field name="third_amount_from"/>
+                                    <span class="text-muted">To</span>
+                                    <field name="third_amount_to"/>
+                                </div>
+                            </group>
+                            <group string="Level 4 Approval">
+                                <field name="fourth_approval"/>
+                                <label for="fourth_amount_from" string="Amount"/>
+                                <div class="o_row">
+                                    <span class="text-muted">From</span>
+                                    <field name="fourth_amount_from"/>
+                                    <span class="text-muted">To</span>
+                                    <field name="fourth_amount_to"/>
                                 </div>
                             </group>
                         </group>
