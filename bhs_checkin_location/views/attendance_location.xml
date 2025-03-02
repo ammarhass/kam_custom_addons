@@ -12,6 +12,7 @@
 			<field name="arch" type="xml">
 				<xpath expr="//field[@name='worked_hours']" position="before">
 					<field name="attendance_location" required="1"/>
+					<field name="gate"/>
 				</xpath>
 			</field>
 		</record>
