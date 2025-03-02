@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+        <record id="vendor_analytic_wizard_form_view" model="ir.ui.view">
+            <field name="name">vendor.analytic.wizard.form.view</field>
+            <field name="model">vendor.analytic.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="vendor_id" readonly="1"/>
+                    </group>
+                    <footer>
+                        <button name="vendor_fun" type="object" string="print"
+                                class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn btn-second"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="vendor_analytic_wizard_action" model="ir.actions.act_window">
+            <field name="name">Print Vendor Report</field>
+            <field name="res_model">vendor.analytic.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <record id="vendor_analytic_wizard_action_open" model="ir.actions.act_window">
+            <field name="name">Vendor Analytic Details</field>
+            <field name="res_model">vendor.analytic.wizard</field>
+            <field name="binding_model_id" ref="base.model_res_partner"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="arkad_excel_report.vendor_analytic_wizard_form_view"/>
+            <field name="context">{'default_vendor_id': active_id}</field>
+            <field name="target">new</field>
+        </record>
+
+
+    </data>
+</odoo>

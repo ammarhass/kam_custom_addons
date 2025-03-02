@@ -537,7 +537,7 @@ class XlsxAnalyticReprot(http.Controller):
         date_format = workbook.add_format({'num_format': 'yyyy/mm/dd'})
 
         headers = ['الإجمالي' ,'مستلزمات البند', 'المستحق للمقاول', 'المدفوع', 'المديونية', 'التاريخ', 'الفاتورة', 'المقاول']
-        
+
         for col_num, header in enumerate(headers):
             worksheet.write(1, col_num, header, header_format)
 
@@ -680,4 +680,78 @@ class XlsxAnalyticReprot(http.Controller):
                 ('Content-Disposition', f'attachment; filename="{file_name}"')
             ]
         )
+
+    @http.route('/analytic/excel/report/vendor/details/<string:vendor_id>', type='http', auth='user', csrf=False)
+    def download_excel_report_vendor_details(self, vendor_id, **kwargs):
+        vendor_id = request.env['res.partner'].browse(literal_eval(vendor_id))
+        analytics = request.env['account.analytic.account'].search([('company_id.id', '=', 110)])
+        vendor_name = vendor_id.name
+        output = io.BytesIO()
+        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+        worksheet = workbook.add_worksheet('Analytic')
+        worksheet.set_column(0, 14, 26)
+        head = workbook.add_format(
+            {'align': 'center', 'bold': True, 'font_size': 15, 'border': 1, 'bg_color': '#808080'})
+
+        worksheet.merge_range('A1:D1', vendor_name, head)
+        header_format = workbook.add_format({'bold': True, 'bg_color': '#D3D3D3', 'border': 1, 'align': 'center'})
+        string_format = workbook.add_format({'bold': True, 'border': 1, 'align': 'center'})
+        currency_format = workbook.add_format({'num_format': '#,##0.00', 'border': 1, 'align': 'center'})
+        total_format = workbook.add_format({'bold': True, 'border': 1, 'bg_color': '#D3D3D3', 'align': 'center'})
+        date_format = workbook.add_format({'num_format': 'yyyy/mm/dd', 'align': 'center'})
+
+        headers = ['المديونية', 'المدفوع', 'إجمالي المستخلص', 'المشروع']
+        for col_num, header in enumerate(headers):
+            worksheet.write(1, col_num, header, header_format)
+        row_num = 2
+        total_amount = 0.0
+        total_residual = 0.0
+        total_paid = 0.0
+        for analytic in analytics:
+            query = request.env['account.move.line']._search(
+                [('move_id.move_type', 'in', request.env['account.move'].get_purchase_types())])
+            query.order = None
+            query.add_where('analytic_distribution ? %s', [str(analytic.id)])
+            query_string, query_param = query.select('DISTINCT account_move_line.move_id')
+            request._cr.execute(query_string, query_param)
+            move_ids = [line.get('move_id') for line in request._cr.dictfetchall()]
+            move_ids = request.env['account.move'].browse(move_ids)
+            move_ids = move_ids.filtered(lambda x: x.partner_id.id == vendor_id.id)
+            amount_total = sum(move_ids.mapped('amount_total'))
+            total_amount += amount_total
+            amount_residual = sum(move_ids.mapped('amount_residual'))
+            total_residual += amount_residual
+            amount_paid = amount_total - amount_residual
+            total_paid += amount_paid
+            if amount_total > 0:
+                worksheet.merge_range(row_num, 3, row_num + 1, 3, analytic.name, string_format)
+                worksheet.merge_range(row_num, 2, row_num + 1, 2, amount_total, currency_format)
+                worksheet.merge_range(row_num, 1, row_num + 1, 1, amount_paid, currency_format)
+                worksheet.merge_range(row_num, 0, row_num + 1, 0, amount_residual, currency_format)
+                row_num += 2
+            worksheet.merge_range(row_num, 3, row_num + 1, 3, 'الإجمالي',
+                            workbook.add_format({'num_format': '#,##0.00', 'border': 1, 'bg_color': '#D3D3D3', 'align': 'center'}))
+            worksheet.merge_range(row_num, 2, row_num + 1, 2, total_amount,
+                            workbook.add_format({'num_format': '#,##0.00', 'border': 1, 'bg_color': '#D3D3D3', 'align': 'center'}))
+            worksheet.merge_range(row_num, 1, row_num + 1, 1, total_paid,
+                            workbook.add_format({'num_format': '#,##0.00', 'border': 1, 'bg_color': '#D3D3D3', 'align': 'center'}))
+            worksheet.merge_range(row_num, 0, row_num + 1, 0, total_residual,
+                            workbook.add_format({'num_format': '#,##0.00', 'border': 1, 'bg_color': '#D3D3D3', 'align': 'center'}))
+
+
+
+
+
+        workbook.close()
+        output.seek(0)
+        file_name = 'vendor_report' + '.xls'
+        return request.make_response(
+            output.getvalue(),
+            headers=[
+                ('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
+                ('Content-Disposition', f'attachment; filename="{file_name}"')
+            ]
+        )
+
+
 

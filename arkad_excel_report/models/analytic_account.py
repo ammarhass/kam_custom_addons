@@ -19,3 +19,10 @@ class AnalyticAccount(models.Model):
             'url': f'/analytic/excel/report/vendor/{self.env.context.get("active_ids")}',
             'target': 'new'
         }
+
+    def create_analytic_report_vendor_details(self):
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/analytic/excel/report/vendor/details/{self.env.context.get("active_ids")}',
+            'target': 'new'
+        }

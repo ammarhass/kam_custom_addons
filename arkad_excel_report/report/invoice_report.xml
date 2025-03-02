@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <template id="report_invoice_document_arkad" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@id='partner_vat_address_not_same_as_shipping']" position="after">
+                <div>
+
+                    <t>Phone</t>:
+                    <span t-field="o.partner_id.phone"/>
+                </div>
+            </xpath>
+            <xpath expr="//div[@id='partner_vat_address_same_as_shipping']" position="after">
+                <div>
+
+                    <t>Phone</t>:
+                    <span t-field="o.partner_id.phone"/>
+                </div>
+            </xpath>
+            <xpath expr="//div[@id='partner_vat_no_shipping']" position="after">
+                <div>
+
+                    <t>Phone</t>:
+                    <span t-field="o.partner_id.phone"/>
+                </div>
+            </xpath>
+
+            <xpath expr="//div[@class='page']//h2[1]" position="after">
+                <t t-if="env.user.has_group('arkad_excel_report.arkad_normal_group')">
+                    <span>Project:</span>
+                    <h3>
+                        <span t-if="o.analytic_account_id" t-field="o.analytic_account_id.name"/>
+                    </h3>
+                </t>
+            </xpath>
+
+            <xpath expr="//t[@t-if='len(payments_vals) > 0']" position="before">
+                <t t-if="env.user.has_group('arkad_excel_report.arkad_normal_group')">
+                    <tr class="fw-bold">
+                        <td>Amount Paid</td>
+                        <td class="text-end">
+                            <span t-esc="o.amount_total - o.amount_residual"/>
+                        </td>
+                    </tr>
+                </t>
+
+            </xpath>
+        </template>
+    </data>
+</odoo>

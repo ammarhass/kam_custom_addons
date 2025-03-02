@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 analytic_account_wizard,analytic_account_wizard_access,model_analytic_account_wizard,,1,1,1,1
+vendor_analytic_wizard,vendor_analytic_wizard_access,model_vendor_analytic_wizard,,1,1,1,1
