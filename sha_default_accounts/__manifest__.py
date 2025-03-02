@@ -18,7 +18,7 @@
     'assets': {
         'point_of_sale.assets': [
             'sha_default_accounts/static/src/js/PartnerList.js',
-            'sha_default_accounts/static/src/js/ReceiptScreen.js',
+            # 'sha_default_accounts/static/src/js/ReceiptScreen.js',
             'sha_default_accounts/static/src/js/RequiredPartner.js',
         ],
     },

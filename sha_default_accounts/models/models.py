@@ -14,12 +14,8 @@ class PosConfig(models.Model):
                                                  domain="[('account_type', '=', 'liability_payable'), ('deprecated', '=', False), "
                                                         "('company_id', '=', current_company_id)]")
 
-    # delete_allowed = fields.Boolean(compute='_set_delete_allowed')
-    #
-    # @api.depends_context('uid')
-    # def _set_delete_allowed(self):
-    #     for rec in self:
-    #         if self.env.user.has_group('point_of_sale.group_pos_manager'):
-    #             rec.delete_allowed = True
-    #         else:
-    #             rec.delete_allowed = False
+
+class PosOrder(models.Model):
+    _inherit = 'pos.order'
+
+    phone = fields.Char(related='partner_id.phone')

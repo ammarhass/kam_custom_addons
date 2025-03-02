@@ -6,9 +6,9 @@ import ReceiptScreen from 'point_of_sale.ReceiptScreen';
 const ReceiptScreenInherit = (ReceiptScreen) => { class ReceiptScreenInherit extends ReceiptScreen {
 
         async printReceipt() {
-            console.log("printReceipt1");
+            //console.log("printReceipt1");
             await super.printReceipt();
-            console.log("printReceipt2");
+            //console.log("printReceipt2");
             this.orderDone()
         }
 

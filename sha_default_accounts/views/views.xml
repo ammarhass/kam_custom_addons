@@ -7,18 +7,6 @@
         <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
         <field name="arch" type="xml">
 
-            <!--            <xpath expr="//div[@id='other_devices']" position="after">-->
-
-            <!--                <div class="col-12 col-lg-6 o_setting_box" id="default_accounts">-->
-
-            <!--                    <group>-->
-            <!--                        <field name="default_account_receivable_id"/>-->
-            <!--                        <field name="default_account_payable_id"/>-->
-            <!--                    </group>-->
-            <!--                </div>-->
-
-            <!--            </xpath>-->
-
             <xpath expr="//div[hasclass('o_settings_container')][2]" position="inside">
 
                 <div class="col-12 col-lg-6 o_setting_box" id="default_accounts">
@@ -28,6 +16,19 @@
                     </group>
                 </div>
 
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="pos_order_form_inherit" model="ir.ui.view">
+        <field name="name">pos.order.form.inherit</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_tree"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="phone"/>
             </xpath>
 
         </field>
