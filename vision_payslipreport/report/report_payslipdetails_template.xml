@@ -9,7 +9,7 @@
                 <div class="d-flex justify-content-between">
                     <!-- Table 1 -->
                     <div class="table-container" style="width: 48%;">
-                        <h2>Details by Salary Rule Category</h2>
+                        <h2>Earnings</h2>
                         <table class="table table-sm mb16">
                             <thead>
                                 <tr>
