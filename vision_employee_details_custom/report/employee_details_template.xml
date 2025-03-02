@@ -1,0 +1,122 @@
+<odoo>
+    <data>
+        <template id="employee_details_template">
+            <t t-call='web.html_container'>
+                <t t-foreach='docs' t-as='o'>
+                    <t t-call='web.external_layout'>
+                        <div style="text-align: center; margin-top: 60px;">
+                            <h1>Employee Details</h1>
+                        </div>
+
+                        <div class="mt-5">
+                            <div class="page">
+                                <table class="table table-sm o_main_table table-borderless">
+                                    <thead style="display: table-row-group">
+                                        <tr>
+                                            <th colspan="4">Promotion Details</th>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <th class="text-start" style="width:50%;">Job Position</th>
+                                            <th class="text-start" style="width:25%;">Salary</th>
+                                            <th class="text-start" style="width:25%;">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="sale_tbody">
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                        <t t-foreach="Promotions" t-as="line">
+                                            <tr>
+                                                <td style="width:50%;">
+                                                    <span t-field="line.job_id.name" t-options="{'widget': 'text'}"/>
+                                                </td>
+                                                <td style="width:25%;">
+                                                    <span t-field="line.salary" t-options="{'widget': 'monetary'}"/>
+                                                </td>
+                                                <td>
+
+                                                </td>
+<!--                                                <td>-->
+<!--                                                    <span t-field="line.date" t-options="{'widget': 'date'}"/>-->
+<!--                                                </td>-->
+                                            </tr>
+                                        </t>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="mt-5">
+                            <div class="page">
+                                <table class="table table-sm o_main_table table-borderless">
+                                    <thead style="display: table-row-group">
+                                        <tr>
+                                            <th colspan="4">Devices &amp; Equipments Details</th>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <th class="text-start" style="width:50%;">Name</th>
+                                            <th class="text-start" style="width:25%;">Date From</th>
+                                            <th class="text-start" style="width:25%;">Date To</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="sale_tbody">
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                        <t t-foreach="Equipments" t-as="line">
+                                            <tr>
+                                                <td style="width:50%;">
+                                                    <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                                </td>
+                                                <td style="width:25%;">
+                                                    <span t-field="line.date" t-options="{'widget': 'date'}"/>
+                                                </td>
+                                                <td style="width:25%;">
+                                                    <span t-field="line.date_to" t-options="{'widget': 'date'}"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <div class="page">
+                                <table class="table table-sm o_main_table table-borderless">
+                                    <thead style="display: table-row-group">
+                                        <tr>
+                                            <th colspan="4">Trainings &amp; Courses Details</th>
+                                        </tr>
+                                        <br/>
+                                        <tr>
+                                            <th class="text-start" style="width:50%;">Name</th>
+                                            <th class="text-start" style="width:25%;">Date From</th>
+                                            <th class="text-start" style="width:25%;">Date To</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="sale_tbody">
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                        <t t-foreach="Trainings" t-as="line">
+                                            <tr>
+                                                <td style="width:50%;">
+                                                    <span t-field="line.program_name" t-options="{'widget': 'text'}"/>
+                                                </td>
+                                                <td style="width:25%;">
+                                                    <span t-field="line.date_from" t-options="{'widget': 'date'}"/>
+                                                </td>
+                                                <td style="width:25%;">
+                                                    <span t-field="line.date_to" t-options="{'widget': 'date'}"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

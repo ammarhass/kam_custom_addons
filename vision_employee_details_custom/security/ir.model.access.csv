@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_promotion_details,promotion.details.access,model_promotion_details,,1,1,1,1
+access_device_equipment_details,device.equipment.access,model_equipment_device_details,,1,1,1,1

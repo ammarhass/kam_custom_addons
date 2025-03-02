@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="inherit_view_employee_form_view_promotion" model="ir.ui.view">
+            <field name="name">inherit.view.employee.form.promotion</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='hr_settings']" position="after">
+                    <page name="employee_promotion" string="Promotion Details">
+                        <field name="promotion_details_ids" widget="one2many_list" mode="tree">
+                            <tree editable="bottom">
+                                <field name="job_id"/>
+                                <field name="salary"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
