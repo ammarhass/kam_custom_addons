@@ -1,0 +1,16 @@
+<odoo>
+
+    <record id="nile_account_account_view_form_inherit" model="ir.ui.view">
+        <field name="name">cairo.account.account.view.form.inherit</field>
+        <field name="model">account.account</field>
+        <field name="priority">10000</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='group_id']" position="after">
+                <field name="is_dashboard"/>
+                <field name="current_balance_Stored"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
