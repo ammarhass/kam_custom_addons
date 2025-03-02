@@ -71,7 +71,7 @@
                         <td class="td_receipt">
                             <span>
                                 <span dir="ltr">
-                                    <t t-esc="receipt.date.localestring or props.order.validation_date"/>
+                                    <t t-esc="receipt.date.localestring"/>
                                 </span>
                             </span>
                         </td>
@@ -97,15 +97,10 @@
                             <span>العميل</span>
                         </td>
                         <td class="td_receipt">
-			    <t t-if="receipt.partner">
-                                <span>
-                                    <t t-esc="receipt.partner.name"/>
-                                </span>
-                           </t>
-                           <t t-else="">
-
-                           </t>
-			</td>
+                            <span>
+                                <t t-esc="receipt.partner.name"/>
+                            </span>
+                        </td>
                     </tr>
 
                     <tr>
@@ -113,15 +108,10 @@
                             <span>رقم الهاتف</span>
                         </td>
                         <td class="td_receipt">
-			    <t t-if="receipt.partner">
-                                <span>
-                                    <t t-esc="receipt.partner.mobile"/>
-                                </span>
-                            </t>
-                            <t t-else="">
-                            </t>
-
-			</td>
+                            <span>
+                                <t t-esc="receipt.partner.mobile"/>
+                            </span>
+                        </td>
                     </tr>
                 </table>
 

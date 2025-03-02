@@ -10,6 +10,7 @@
     # 'images': ['static/description/banner.jpg'],
     'depends': ['base', 'point_of_sale', 'total_quantity_pos'],
     'data': [
+        'security/security.xml',
         # 'views/views.xml',
     ],
     'assets': {
