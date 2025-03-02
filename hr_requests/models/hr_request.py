@@ -10,7 +10,8 @@ class HrRequest(models.Model):
     request_type = fields.Selection([
         ('hr_letter', 'HR Letter'),
         ('embassy_letter', 'Embassy Letter'),
-        ('experience_letter', 'Experience Letter')], string='Request Type',
+        ('experience_letter', 'Experience Letter'),
+        ('training_request', 'Training Request')], string='Request Type',
         copy=False, default='hr_letter', required=True,
         help="Type of HR Request")
     employee_id = fields.Many2one('hr.employee', string='Employee', default=lambda self: self.env.user.employee_id,
