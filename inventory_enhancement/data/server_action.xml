@@ -1,0 +1,10 @@
+<odoo>
+    <record id="action_auto_carrier" model="ir.actions.server">
+            <field name="name">AUto Fill Carrier</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_stock_picking" />
+            <field name="binding_model_id" ref="inventory_enhancement.model_stock_picking" />
+            <field name="state">code</field>
+            <field name="code">action = records.open_wizard()</field>
+        </record>
+</odoo>
