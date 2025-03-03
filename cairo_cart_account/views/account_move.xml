@@ -1,0 +1,41 @@
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="account_move_form_inherit2" model="ir.ui.view">
+        <field name="name">account.move.form.inherit2</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="bi_sale_purchase_discount_with_tax.view_account_invoice_discount_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='discount_type']" position="after">
+                <field name="downpayment_amount"/>
+
+                <!-- Add your fields or attributes here -->
+            </xpath>
+
+        </field>
+    </record>
+    <record id="account_move_form_inherit3" model="ir.ui.view">
+        <field name="name">account.move.form.inherit3</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']//tree/field[@name='price_total']" position="after">
+
+                    <field name="tax_amount" optional="hide"/>
+                    <field name="total_after_tax" optional="hide"/>
+            </xpath>
+
+
+            <xpath expr="//page[@name='other_info']" position="after">
+                <page string="payments">
+                              <group>
+                                <field name="payment_move_ids"/>
+                              </group>
+                            </page>
+
+                <!-- Add your fields or attributes here -->
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
